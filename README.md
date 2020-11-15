@@ -1,5 +1,6 @@
 # CSC690-Term-Project
 Contact Tracing App
+
 Jennifer Finaldi ID: 920290420
 
 Contact Tracing iOS App
