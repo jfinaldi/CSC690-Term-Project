@@ -5,6 +5,8 @@ Jennifer Finaldi ID: 920290420
 
 Leslie Zhou ID: 916602224
 
+Wameedh Mohammed Ali ID: 920678405
+
 Contact Tracing iOS App
 
 Overview: Uses location tracking in the iPhone to easily keep track of other phones that come into a certain vicinity of the user. 
