@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ContactTracingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
