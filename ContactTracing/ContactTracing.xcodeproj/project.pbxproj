@@ -18,6 +18,7 @@
 		3B07583E256C6E3200988D2A /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B07583D256C6E3200988D2A /* CreateAccountViewController.swift */; };
 		3B075846256C6FBF00988D2A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B075845256C6FBF00988D2A /* HomeViewController.swift */; };
 		3B07584B256C7E0D00988D2A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B07584A256C7E0D00988D2A /* LoginViewController.swift */; };
+		3BADCC5025730A7400EE1702 /* ContactTracingBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BADCC4F25730A7400EE1702 /* ContactTracingBrain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		3B07583D256C6E3200988D2A /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		3B075845256C6FBF00988D2A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3B07584A256C7E0D00988D2A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		3BADCC4F25730A7400EE1702 /* ContactTracingBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTracingBrain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			children = (
 				3B07580A256C660500988D2A /* AppDelegate.swift */,
 				3B07580C256C660500988D2A /* SceneDelegate.swift */,
+				3BADCC4F25730A7400EE1702 /* ContactTracingBrain.swift */,
 				3B07580E256C660500988D2A /* ContactTracingViewController.swift */,
 				3B07583D256C6E3200988D2A /* CreateAccountViewController.swift */,
 				3B075845256C6FBF00988D2A /* HomeViewController.swift */,
@@ -269,6 +272,7 @@
 			files = (
 				3B07584B256C7E0D00988D2A /* LoginViewController.swift in Sources */,
 				3B075846256C6FBF00988D2A /* HomeViewController.swift in Sources */,
+				3BADCC5025730A7400EE1702 /* ContactTracingBrain.swift in Sources */,
 				3B07583E256C6E3200988D2A /* CreateAccountViewController.swift in Sources */,
 				3B07580F256C660500988D2A /* ContactTracingViewController.swift in Sources */,
 				3B07580B256C660500988D2A /* AppDelegate.swift in Sources */,
