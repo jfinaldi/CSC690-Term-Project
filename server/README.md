@@ -1,0 +1,5 @@
+- HOW TO RUN
+    - go to MySQL Workbench, open a connection, then run the 'ImAlreadyTracer.sql' file
+    - in server folder, change the connection password then run the following
+        - npm instaall
+        - node .

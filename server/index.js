@@ -1,37 +1,69 @@
 const express = require('express')
-const mysql = require('mysql')
+const mysql = require('mysql2')
+const fs = require('fs')
 
 const app = express()
 app.use(express.json())
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 4000
 
-app.listen(port, () => console.log(`listening on port ${port}`))
+var con = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: '', //put your password here
+    database: 'ImAlreadyTracer',
+});
 
-app.post('/signup', (req, res) => {
-    // fetch username from user
+con.connect((err) => {
+    if (err) {
+        console.log(err);
+        process.exit(1)
+    }
 
-    // no result -> insert to user and return success
+    console.log('connected');
 
-    // yes result -> return fail
-})
+    app.listen(port, () => console.log(`listening on port ${port}`))
 
-app.post('/login', (req, res) => {
-    // fetch password from user
+    app.post('/signup', (req, res) => {
+        // fetch username from user
+        con.query(`SELECT * FROM user WHERE username = ?`, [req.body.username], (err, result) => {
+            if (err) throw err
+            console.log(result);
+            if (result.length === 0) {
+                con.query(`INSERT INTO user(username,password) VALUES('${req.body.username.split('\'').join('\'\'')}','${req.body.password}')`, (err, result) => {
+                    if (err) {
+                        console.log({ err, result });
+                        res.send({ success: false, code: 'db error' })
+                    }
+                    res.send({ success: true })
+                })
+            } else {
+                res.status(500).send({ success: false, code: 'existed' })
+            }
+        })
 
-    // password matches -> return success
+        // no result -> insert to user and return success
 
-    // password not match -> return fail
-})
+        // yes result -> return fail
+    })
 
-app.post('/loglocation', (req, res) => {
-    // insert username, location to location
-})
+    app.post('/login', (req, res) => {
+        // fetch password from user
 
-app.post('/report', (req, res) => {
-    // fetch all location of user from location
+        // password matches -> return success
 
-    // for each location, fetch username from location
+        // password not match -> return fail
+    })
 
-    // send out notification to each user
+    app.post('/loglocation', (req, res) => {
+        // insert username, location to location
+    })
+
+    app.post('/report', (req, res) => {
+        // fetch all location of user from location
+
+        // for each location, fetch username from location
+
+        // send out notification to each user
+    })
 })
