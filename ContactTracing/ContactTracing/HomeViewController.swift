@@ -4,7 +4,7 @@
 //
 //  Created by Jennifer Finaldi on 11/23/20.
 //
-
+import MapKit
 import UIKit
 
 class HomeViewController: UIViewController {
@@ -16,9 +16,9 @@ class HomeViewController: UIViewController {
     let cBrain = ContactTracingBrain()
     let qBrain = QuarantineBrain()
     
-//    @IBOutlet weak var map1: MKMapView!
-//    @IBOutlet weak var map2: MKMapView!
-//    @IBOutlet weak var map3: MKMapView!
+    @IBOutlet weak var map1: MKMapView!
+    @IBOutlet weak var map2: MKMapView!
+    @IBOutlet weak var map3: MKMapView!
     
     @IBOutlet weak var daysLeftLabel: UILabel!
     
@@ -33,7 +33,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func beginQuarantineClicked(_ sender: Any) {
-        qBrain.startCountdown()
+        //qBrain.startCountdown()
         cBrain.isQuarantined = true
     }
     
@@ -69,12 +69,12 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         //add our notifications
-        NotificationCenter.default.addObserver(self, selector: #selector(updateCounter),
-                                               name: QuarantineBrain.qCounterUpdated,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(countdownCompleted),
-                                               name: QuarantineBrain.qCounterFinished,
-                                               object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(updateCounter),
+//                                               name: QuarantineBrain.qCounterUpdated,
+//                                               object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(countdownCompleted),
+//                                               name: QuarantineBrain.qCounterFinished,
+//                                               object: nil)
     }
     
 }
