@@ -30,9 +30,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ImAlreadyTracer`.`location` (
   `location_id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
   `latitude` DOUBLE NULL,
   `longtitude` DOUBLE NULL,
-  `user_id` INT NOT NULL,
+  `time` DATETIME NULL,
+  `infected` TINYINT NULL,
   PRIMARY KEY (`location_id`, `user_id`),
   INDEX `fk_location_user_idx` (`user_id` ASC) VISIBLE,
   CONSTRAINT `fk_location_user`
