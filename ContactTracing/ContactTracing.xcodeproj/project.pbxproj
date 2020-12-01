@@ -19,6 +19,7 @@
 		3B075846256C6FBF00988D2A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B075845256C6FBF00988D2A /* HomeViewController.swift */; };
 		3B07584B256C7E0D00988D2A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B07584A256C7E0D00988D2A /* LoginViewController.swift */; };
 		3BADCC5025730A7400EE1702 /* ContactTracingBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BADCC4F25730A7400EE1702 /* ContactTracingBrain.swift */; };
+		3BEC2E592575C5650009C1F6 /* QuarantineBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEC2E582575C5650009C1F6 /* QuarantineBrain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		3B075845256C6FBF00988D2A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3B07584A256C7E0D00988D2A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3BADCC4F25730A7400EE1702 /* ContactTracingBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTracingBrain.swift; sourceTree = "<group>"; };
+		3BEC2E582575C5650009C1F6 /* QuarantineBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuarantineBrain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,9 @@
 		3B0757FE256C660500988D2A = {
 			isa = PBXGroup;
 			children = (
+				3BEC2E602575CE210009C1F6 /* View */,
+				3BEC2E5F2575C5BE0009C1F6 /* ViewControllers */,
+				3BEC2E5E2575C5A90009C1F6 /* Model */,
 				3B075809256C660500988D2A /* ContactTracing */,
 				3B075820256C660600988D2A /* ContactTracingTests */,
 				3B07582B256C660600988D2A /* ContactTracingUITests */,
@@ -109,12 +114,6 @@
 			children = (
 				3B07580A256C660500988D2A /* AppDelegate.swift */,
 				3B07580C256C660500988D2A /* SceneDelegate.swift */,
-				3BADCC4F25730A7400EE1702 /* ContactTracingBrain.swift */,
-				3B07580E256C660500988D2A /* ContactTracingViewController.swift */,
-				3B07583D256C6E3200988D2A /* CreateAccountViewController.swift */,
-				3B075845256C6FBF00988D2A /* HomeViewController.swift */,
-				3B07584A256C7E0D00988D2A /* LoginViewController.swift */,
-				3B075810256C660500988D2A /* Main.storyboard */,
 				3B075813256C660600988D2A /* Assets.xcassets */,
 				3B075815256C660600988D2A /* LaunchScreen.storyboard */,
 				3B075818256C660600988D2A /* Info.plist */,
@@ -138,6 +137,34 @@
 				3B07582E256C660600988D2A /* Info.plist */,
 			);
 			path = ContactTracingUITests;
+			sourceTree = "<group>";
+		};
+		3BEC2E5E2575C5A90009C1F6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3BEC2E582575C5650009C1F6 /* QuarantineBrain.swift */,
+				3BADCC4F25730A7400EE1702 /* ContactTracingBrain.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3BEC2E5F2575C5BE0009C1F6 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3B07583D256C6E3200988D2A /* CreateAccountViewController.swift */,
+				3B07580E256C660500988D2A /* ContactTracingViewController.swift */,
+				3B07584A256C7E0D00988D2A /* LoginViewController.swift */,
+				3B075845256C6FBF00988D2A /* HomeViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		3BEC2E602575CE210009C1F6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3B075810256C660500988D2A /* Main.storyboard */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,6 +301,7 @@
 				3B075846256C6FBF00988D2A /* HomeViewController.swift in Sources */,
 				3BADCC5025730A7400EE1702 /* ContactTracingBrain.swift in Sources */,
 				3B07583E256C6E3200988D2A /* CreateAccountViewController.swift in Sources */,
+				3BEC2E592575C5650009C1F6 /* QuarantineBrain.swift in Sources */,
 				3B07580F256C660500988D2A /* ContactTracingViewController.swift in Sources */,
 				3B07580B256C660500988D2A /* AppDelegate.swift in Sources */,
 				3B07580D256C660500988D2A /* SceneDelegate.swift in Sources */,

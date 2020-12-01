@@ -1,39 +1,15 @@
 //
-//  ContactTracingBrain.swift
+//  QuarantineBrain.swift
 //  ContactTracing
 //
-//  Created by Jennifer Finaldi on 11/28/20.
+//  Created by Jennifer Finaldi on 11/30/20.
 //
 
+import Foundation
 import UIKit
-
-class ContactTracingBrain {
-    
-    var username: String
-    var isRegistered: Bool
-    var isInfected: Bool
-    var isQuarantined: Bool
-    var quarantineDaysLeft: Int?
-    var qBrain: QuarantineBrain?
-    let getTestedLink: String = "https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/testing.html"
-    
-    init() {
-        self.username = ""
-        self.isRegistered = true
-        self.isInfected = false
-        self.isQuarantined = false
-    }
-    
-    //function to start a quarantine
-    //function to mark infected/recovered
-    //function to call 911
-    
-    
-}
 
 class QuarantineBrain {
     
-//    static let qCounterUpdated = Notification.Name("QuarantineBrain.qCounterUpdated")
 //    static let qCounterFinished = Notification.Name("QuarantineBrain.qCounterFinished")
 //
 //    let seconds: TimeInterval = 1209600
@@ -78,3 +54,4 @@ class QuarantineBrain {
 //        })
 //    }
 }
+
