@@ -12,6 +12,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var home1Label: UILabel!
     @IBOutlet weak var home2Label: UILabel!
     @IBOutlet weak var home3Label: UILabel!
+    @IBOutlet weak var redButton: UIButton!
+    @IBOutlet weak var greenButton: UIButton!
     
     let cBrain = ContactTracingBrain()
     let qBrain = QuarantineBrain()
@@ -54,6 +56,7 @@ class HomeViewController: UIViewController {
         //unmark user infected
         //update database
         //stop quarantine(?)
+        //change the view buttons
     }
     
     @objc func updateCounter() {
@@ -62,6 +65,15 @@ class HomeViewController: UIViewController {
     
     @objc func countdownCompleted() {
         
+    }
+    
+    func changeButtonText(from: String, to: String) {
+        //determine which button to change
+        //if redButton
+        //button.setTitle("my text here", for: .normal)
+        //if greenButton
+        //button.setTitle("my text here", for: .normal)
+        //if blueButton
     }
     
     

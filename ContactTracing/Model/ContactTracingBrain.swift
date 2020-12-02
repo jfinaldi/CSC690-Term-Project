@@ -9,11 +9,12 @@ import UIKit
 
 class ContactTracingBrain {
     
-    var username: String
-    var isRegistered: Bool
-    var isInfected: Bool
-    var isAtRisk: Bool
-    var isQuarantined: Bool
+    var username: String = ""
+    var isRegistered: Bool = true
+    var isLoggedIn: Bool = true
+    var isInfected: Bool = false
+    var isAtRisk: Bool = false
+    var isQuarantined: Bool = false
     var quarantineDaysLeft: Int?
     var qBrain: QuarantineBrain?
     let getTestedLink: String = "https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/testing.html"
@@ -21,7 +22,8 @@ class ContactTracingBrain {
     init() {
         self.username = ""
         self.isRegistered = true
-        self.isInfected = false
+        self.isLoggedIn = true
+        self.isInfected = false //THIS IS ALL HARD CODED DATA FOR TESTING
         self.isAtRisk = false
         self.isQuarantined = false
     }

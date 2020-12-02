@@ -153,9 +153,9 @@
 		3BEC2E5F2575C5BE0009C1F6 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				3B07583D256C6E3200988D2A /* CreateAccountViewController.swift */,
 				3B07580E256C660500988D2A /* ContactTracingViewController.swift */,
 				3B07584A256C7E0D00988D2A /* LoginViewController.swift */,
+				3B07583D256C6E3200988D2A /* CreateAccountViewController.swift */,
 				3B075845256C6FBF00988D2A /* HomeViewController.swift */,
 			);
 			path = ViewControllers;
