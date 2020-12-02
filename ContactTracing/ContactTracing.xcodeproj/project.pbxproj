@@ -59,6 +59,7 @@
 		3B07584A256C7E0D00988D2A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3BADCC4F25730A7400EE1702 /* ContactTracingBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTracingBrain.swift; sourceTree = "<group>"; };
 		3BEC2E582575C5650009C1F6 /* QuarantineBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuarantineBrain.swift; sourceTree = "<group>"; };
+		3C7FBD9925773C7000FF9066 /* ContactTracing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ContactTracing.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +113,7 @@
 		3B075809256C660500988D2A /* ContactTracing */ = {
 			isa = PBXGroup;
 			children = (
+				3C7FBD9925773C7000FF9066 /* ContactTracing.entitlements */,
 				3B07580A256C660500988D2A /* AppDelegate.swift */,
 				3B07580C256C660500988D2A /* SceneDelegate.swift */,
 				3B075813256C660600988D2A /* Assets.xcassets */,
@@ -480,6 +482,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ContactTracing/ContactTracing.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ContactTracing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -498,6 +501,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ContactTracing/ContactTracing.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ContactTracing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

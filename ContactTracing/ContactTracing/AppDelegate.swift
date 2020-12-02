@@ -6,14 +6,30 @@
 //
 
 import UIKit
+import UserNotifications
+import PushKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+	func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+		print("token: \(deviceToken)")
+	}
+	
+	func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+		print("error: \(error)")
+	}
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+		
+		UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: {(granted, error) in
+			print("granted: \(granted)")
+		})
+		
+		UIApplication.shared.registerForRemoteNotifications()
+		
         return true
     }
 

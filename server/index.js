@@ -30,6 +30,7 @@ con.connect((err) => {
             if (err) throw err
             console.log(result);
             if (result.length === 0) {
+                // no result -> insert to user and return success
                 con.query(`INSERT INTO user(username,password) VALUES('${req.body.username.split('\'').join('\'\'')}','${req.body.password}')`, (err, result) => {
                     if (err) {
                         console.log({ err, result });
@@ -38,21 +39,44 @@ con.connect((err) => {
                     res.send({ success: true })
                 })
             } else {
+                // yes result -> user existed, return fail
                 res.status(500).send({ success: false, code: 'existed' })
             }
         })
-
-        // no result -> insert to user and return success
-
-        // yes result -> return fail
     })
 
     app.post('/login', (req, res) => {
         // fetch password from user
+        con.query(`SELECT password FROM user WHERE username=?`, [req.body.username], (err, result) => {
+            if (err) throw err
+            if (result.length === 0) {
+                //user not found
+                res.send({
+                    success: false,
+                    code: 'not exist'
+                })
+            } else {
+                console.log(result[0].password);
+                if (result[0].password === req.body.password) {
+                    // password matches -> create login token, return success
+                    var token = Date.now()
+                    console.log(token)
+                    con.query(`UPDATE user SET login_token = '${token}' WHERE username = '${req.body.username}'`)
+                    res.send({
+                        success: true,
+                        token: token
+                    })
+                } else {
+                    // password not match -> return fail
+                    console.log('not match');
+                    res.send({
+                        success: false,
+                        code: 'wrong password'
+                    })
+                }
+            }
+        })
 
-        // password matches -> return success
-
-        // password not match -> return fail
     })
 
     app.post('/loglocation', (req, res) => {

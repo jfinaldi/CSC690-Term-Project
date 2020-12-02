@@ -21,6 +21,8 @@ CREATE TABLE IF NOT EXISTS `ImAlreadyTracer`.`user` (
   `user_id` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
+  `login_token` VARCHAR(45) NULL,
+  `device_token` VARCHAR(45) NULL,
   PRIMARY KEY (`user_id`))
 ENGINE = InnoDB;
 
