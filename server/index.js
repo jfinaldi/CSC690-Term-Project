@@ -10,7 +10,7 @@ const port = process.env.PORT || 4000
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: '', //put your password here
+    password: 'Spacey32!', //put your password here
     database: 'ImAlreadyTracer',
 });
 
