@@ -10,48 +10,34 @@ import UIKit
 
 class QuarantineBrain {
     
-//    static let qCounterFinished = Notification.Name("QuarantineBrain.qCounterFinished")
-//
-//    let seconds: TimeInterval = 1209600
-//    let secondsPerDay: Double = 86400
-//
-//    var daysLeft: Int?
-//    var secondsLeft: TimeInterval?
-//    var timer: Timer?
-//
-//    func startCountdown() {
-//
-//
-//        //countdown the specific number
-//        //notify that the counter has decremented
-//        //notify that days have changed
-//        //notify that hours have changed
-//        //notify that minutes have changed
-//        //notify that seconds have changed
-//        //if everything goes to 0, notify that the counter has finished
-//            //invalidate the timer
-//
-//        secondsLeft = self.seconds
-//        timer?.invalidate()
-//        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer: Timer) -> Void in
-//            guard let secondsLeft = self.secondsLeft else {
-//                return
-//            }
-//            let newSeconds = secondsLeft - 1
-//
-//            if newSeconds >= 0 {
-//                self.secondsLeft = newSeconds
-//                let dL: Double = newSeconds / self.secondsPerDay //derive the days in doubles
-//                self.daysLeft = Int(dL) //truncate and save as integer
-//                //Notify that seconds have changed
-//                NotificationCenter.default.post(name: QuarantineBrain.qCounterUpdated, object: nil)
-//            }
-//            if newSeconds == 0 {
-//                print("Done!")
-//                NotificationCenter.default.post(name: QuarantineBrain.qCounterFinished, object: nil)
-//                timer.invalidate()
-//            }
-//        })
-//    }
+      // Create Obj -> USER:
+    //            `username` -> string
+    //            `password` -> string
+    //            `login_token` // Save in user_def -> int
+    //            `device_token`// Save in user_def -> string
+                    
+        // request params: username, pass, device_token
+        // response: login_token
+        
+        // "https://localhost:4000/login"
+        
+        // Create Obj -> Location
+    //        `user_id` -> int
+    //        `latitude` -> Double
+    //        `longtitude` -> Double
+    //        `time` -> Date
+    //        `infected` -> Bool
+     
+        //request params: username, login_token
+         // response: [Location]
+        
+        // "https://localhost:4000/getLocations"
+     
+    //    {'latitude': Double,
+    //    `longtitude`: Double,
+    //    `time`: 'year/month/day/time',
+    //    'infected': Bool
+    //    }
+
 }
 
