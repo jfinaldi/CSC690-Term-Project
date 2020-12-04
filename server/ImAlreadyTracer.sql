@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `ImAlreadyTracer`.`location` (
   `latitude` DOUBLE NULL,
   `longtitude` DOUBLE NULL,
   `time` DATETIME NULL,
-  `infected` TINYINT NULL,
+  `infected` TINYINT(1) NULL,
   PRIMARY KEY (`location_id`, `user_id`),
   INDEX `fk_location_user_idx` (`user_id` ASC) VISIBLE,
   CONSTRAINT `fk_location_user`

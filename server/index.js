@@ -8,9 +8,9 @@ app.use(express.json())
 const port = process.env.PORT || 4000
 
 var con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: '', //put your password here
+    host: "18.188.195.49",
+    user: "tracer",
+    password: 'ImAlreadyTracer',
     database: 'ImAlreadyTracer',
 });
 
@@ -24,35 +24,54 @@ con.connect((err) => {
 
     app.listen(port, () => console.log(`listening on port ${port}`))
 
+    //app signup req(username: string, password: string) res(success: bool)
     app.post('/signup', (req, res) => {
         // fetch username from user
-        con.query(`SELECT * FROM user WHERE username = ?`, [req.body.username], (err, result) => {
-            if (err) throw err
-            console.log(result);
-            if (result.length === 0) {
-                // no result -> insert to user and return success
-                con.query(`INSERT INTO user(username,password) VALUES('${req.body.username.split('\'').join('\'\'')}','${req.body.password}')`, (err, result) => {
-                    if (err) {
-                        console.log({ err, result });
-                        res.send({ success: false, code: 'db error' })
-                    }
-                    res.send({ success: true })
-                })
-            } else {
-                // yes result -> user existed, return fail
-                res.status(500).send({ success: false, code: 'existed' })
-            }
+        console.log({
+            endpoint: '/signup',
+            username: req.body.username,
+            password: req.body.password,
         })
+
+        if (req.body.username && req.body.password) {
+            con.query(`SELECT * FROM user WHERE username = ?`, [req.body.username], (err, result) => {
+                if (err) throw err
+                console.log(result);
+                if (result.length === 0) {
+                    // no result -> insert to user and return success
+                    con.query(`INSERT INTO user(username,password) VALUES('${req.body.username.split('\'').join('\'\'')}','${req.body.password}')`, (err, result) => {
+                        if (err) {
+                            console.log({ err, result });
+                            res.send({ success: false, code: 'db error' })
+                        }
+                        res.send({ success: true })
+                    })
+                } else {
+                    // yes result -> user existed, return fail
+                    res.status(500).send({ success: false, code: 'existed' })
+                }
+            })
+        } else {
+            res.status(500).send({error: 'invalid input'})
+        }
     })
 
+    //app login req(username: string, password: string, device_token: string) res(login_token: int)
     app.post('/login', (req, res) => {
         // fetch password from user
+        console.log({
+            endpoint: '/login',
+            username: req.body.username,
+            password: req.body.password,
+            device_token: req.body.device_token,
+        })
+
         con.query(`SELECT password FROM user WHERE username=?`, [req.body.username], (err, result) => {
             if (err) throw err
             if (result.length === 0) {
                 //user not found
                 res.send({
-                    success: false,
+                    token: null,
                     code: 'not exist'
                 })
             } else {
@@ -61,28 +80,56 @@ con.connect((err) => {
                     // password matches -> create login token, return success
                     var token = Date.now()
                     console.log(token)
-                    con.query(`UPDATE user SET login_token = '${token}' WHERE username = '${req.body.username}'`)
+                    con.query(`UPDATE user SET login_token = '${token}', device_token = '${req.body.device_token}' WHERE username = '${req.body.username}'`)
                     res.send({
-                        success: true,
                         token: token
                     })
                 } else {
                     // password not match -> return fail
                     console.log('not match');
                     res.send({
-                        success: false,
+                        token: null,
                         code: 'wrong password'
                     })
                 }
             }
         })
-
     })
 
+    //get locations of the user req(username: string, login_token: int) res(locations: [Location])
+    app.post('/getLocations', (req, res) => {
+        console.log({
+            endpoint: '/getLocations',
+            username: req.body.username,
+            password: req.body.password,
+            device_token: req.body.device_token,
+        })
+
+        if (req.body.username && req.body.login_token) {
+            con.query(`SELECT login_token, user_id FROM user WHERE username=?`, [req.body.username], (err, result) => {
+                if (err) throw err
+                console.log(result[0].login_token)
+                if (result[0].login_token === req.body.login_token) {
+                    con.query(`SELECT latitude, longtitude, time, infected FROM location WHERE user_id=?`, [result[0].user_id], (err, result) => {
+                        if (err) throw err
+                        console.log(result)
+                        res.send({ locations: result })
+                    })
+                } else {
+                    res.send({ locations: null })
+                }
+            })
+        } else {
+            res.status(500).send({ error: 'invalid session' })
+        }
+    })
+
+    //save user location req(username: string, login_token: int, latitude: double, longtitude: double) res()
     app.post('/loglocation', (req, res) => {
         // insert username, location to location
     })
 
+    //report infection and notify other users req(username: string, login_token: int)
     app.post('/report', (req, res) => {
         // fetch all location of user from location
 
