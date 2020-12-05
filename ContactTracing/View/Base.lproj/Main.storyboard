@@ -317,7 +317,6 @@
                         <outlet property="qLabel1" destination="WaW-HD-CNB" id="dYa-bp-SrS"/>
                         <outlet property="qLabel2" destination="ecf-zQ-xWM" id="rTm-iq-9aR"/>
                         <outlet property="redButton" destination="3mn-Tf-cYk" id="xHe-7L-nBm"/>
-                        <outlet property="redButtonClicked" destination="3mn-Tf-cYk" id="p5Y-fL-r8C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pyk-dj-ChF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
