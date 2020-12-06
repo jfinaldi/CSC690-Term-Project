@@ -220,21 +220,6 @@
                                     <constraint firstAttribute="height" constant="280" id="J0l-XY-JYJ"/>
                                 </constraints>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="XIQ-jm-Han">
-                                <rect key="frame" x="209.5" y="392" width="184.5" height="75"/>
-                                <color key="backgroundColor" systemColor="systemGreenColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="PKM-cS-CVs"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="31"/>
-                                <state key="normal" title="Get Tested">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="getTestedClicked:" destination="g8K-6a-Cak" eventType="touchUpInside" id="ybZ-O3-jpz"/>
-                                    <action selector="greenButtonClicked:" destination="g8K-6a-Cak" eventType="touchUpInside" id="EcA-NT-gTu"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="center" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="3mn-Tf-cYk">
                                 <rect key="frame" x="20" y="392" width="184.5" height="75"/>
                                 <color key="backgroundColor" red="0.86091321239999996" green="0.063334434420000002" blue="0.084434636359999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -278,7 +263,21 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="beginQuarantineClicked:" destination="g8K-6a-Cak" eventType="touchUpInside" id="68v-jB-thx"/>
+                                    <action selector="blueButtonClicked:" destination="g8K-6a-Cak" eventType="touchUpInside" id="68v-jB-thx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="txV-Gj-YdA">
+                                <rect key="frame" x="209.5" y="392" width="184.5" height="75"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="HBC-DB-aBC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="31"/>
+                                <state key="normal" title="Get Tested">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="greenButtonClicked:" destination="g8K-6a-Cak" eventType="touchUpInside" id="Oue-he-eIq"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -289,19 +288,19 @@
                             <constraint firstItem="RmU-5n-eg2" firstAttribute="leading" secondItem="SQd-RI-gnJ" secondAttribute="leading" constant="15" id="3Ed-54-c3U"/>
                             <constraint firstItem="SQd-RI-gnJ" firstAttribute="trailing" secondItem="ruH-4x-mHq" secondAttribute="trailing" constant="20" id="7wR-Ck-7VU"/>
                             <constraint firstItem="SQd-RI-gnJ" firstAttribute="trailing" secondItem="WaW-HD-CNB" secondAttribute="trailing" constant="15" id="GJH-bo-Jd0"/>
-                            <constraint firstItem="XIQ-jm-Han" firstAttribute="width" secondItem="3mn-Tf-cYk" secondAttribute="width" id="ItW-wG-vmZ"/>
                             <constraint firstItem="ecf-zQ-xWM" firstAttribute="top" secondItem="WaW-HD-CNB" secondAttribute="bottom" constant="4" id="P8h-pj-L2U"/>
                             <constraint firstItem="ecf-zQ-xWM" firstAttribute="leading" secondItem="SQd-RI-gnJ" secondAttribute="leading" constant="15" id="PyD-Oi-Z8X"/>
                             <constraint firstItem="SQd-RI-gnJ" firstAttribute="trailing" secondItem="ecf-zQ-xWM" secondAttribute="trailing" constant="15" id="UF4-Ma-1UX"/>
+                            <constraint firstItem="SQd-RI-gnJ" firstAttribute="trailing" secondItem="txV-Gj-YdA" secondAttribute="trailing" constant="20" id="UbU-3S-lg4"/>
+                            <constraint firstItem="txV-Gj-YdA" firstAttribute="top" secondItem="1ZG-rm-Kki" secondAttribute="bottom" constant="25" id="Vpm-Kf-A8T"/>
                             <constraint firstItem="ruH-4x-mHq" firstAttribute="leading" secondItem="Q3V-gA-XJS" secondAttribute="leading" constant="20" id="XX8-VW-nSk"/>
                             <constraint firstItem="1ZG-rm-Kki" firstAttribute="top" secondItem="RmU-5n-eg2" secondAttribute="bottom" constant="15" id="aaF-iP-Lo2"/>
                             <constraint firstItem="3mn-Tf-cYk" firstAttribute="top" secondItem="1ZG-rm-Kki" secondAttribute="bottom" constant="25" id="d9C-dq-cqk"/>
-                            <constraint firstItem="ruH-4x-mHq" firstAttribute="top" secondItem="XIQ-jm-Han" secondAttribute="bottom" constant="5" id="efK-oZ-EHC"/>
-                            <constraint firstItem="XIQ-jm-Han" firstAttribute="top" secondItem="1ZG-rm-Kki" secondAttribute="bottom" constant="25" id="jcY-oj-vSQ"/>
-                            <constraint firstItem="SQd-RI-gnJ" firstAttribute="trailing" secondItem="XIQ-jm-Han" secondAttribute="trailing" constant="20" id="miV-Ai-hnc"/>
-                            <constraint firstItem="XIQ-jm-Han" firstAttribute="leading" secondItem="3mn-Tf-cYk" secondAttribute="trailing" constant="5" id="qGR-l7-gGg"/>
+                            <constraint firstItem="txV-Gj-YdA" firstAttribute="leading" secondItem="3mn-Tf-cYk" secondAttribute="trailing" constant="5" id="dvA-g5-I6y"/>
+                            <constraint firstItem="ruH-4x-mHq" firstAttribute="top" secondItem="3mn-Tf-cYk" secondAttribute="bottom" constant="5" id="ijp-vi-9aV"/>
                             <constraint firstItem="WaW-HD-CNB" firstAttribute="leading" secondItem="Q3V-gA-XJS" secondAttribute="leading" constant="15" id="qHv-BU-yCv"/>
                             <constraint firstItem="RmU-5n-eg2" firstAttribute="top" secondItem="SQd-RI-gnJ" secondAttribute="top" constant="20" id="sXQ-0W-XNY"/>
+                            <constraint firstItem="txV-Gj-YdA" firstAttribute="width" secondItem="3mn-Tf-cYk" secondAttribute="width" id="u00-5i-JB0"/>
                             <constraint firstItem="WaW-HD-CNB" firstAttribute="top" secondItem="ruH-4x-mHq" secondAttribute="bottom" constant="25" id="uHd-ll-qPl"/>
                             <constraint firstItem="1ZG-rm-Kki" firstAttribute="leading" secondItem="SQd-RI-gnJ" secondAttribute="leading" constant="15" id="vgT-xv-eAZ"/>
                             <constraint firstItem="3mn-Tf-cYk" firstAttribute="leading" secondItem="SQd-RI-gnJ" secondAttribute="leading" constant="20" id="z5H-HX-ZYs"/>
@@ -311,7 +310,7 @@
                     <navigationItem key="navigationItem" id="OEt-0E-WAX"/>
                     <connections>
                         <outlet property="blueButton" destination="ruH-4x-mHq" id="4di-h1-Ouf"/>
-                        <outlet property="greenButton" destination="XIQ-jm-Han" id="uxv-1I-ut0"/>
+                        <outlet property="greenButton" destination="txV-Gj-YdA" id="ZrT-Dh-io2"/>
                         <outlet property="home1Label" destination="RmU-5n-eg2" id="Vq9-ey-LJA"/>
                         <outlet property="map1" destination="1ZG-rm-Kki" id="HD6-aW-RQt"/>
                         <outlet property="qLabel1" destination="WaW-HD-CNB" id="dYa-bp-SrS"/>
@@ -321,7 +320,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pyk-dj-ChF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="983" y="97"/>
+            <point key="canvasLocation" x="982.60869565217399" y="96.428571428571431"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

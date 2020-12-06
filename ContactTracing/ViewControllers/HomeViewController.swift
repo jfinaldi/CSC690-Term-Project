@@ -43,11 +43,11 @@ enum statusLabels: String, CaseIterable, CustomStringConvertible {
     }
 }
     
-struct ViewComponents {
-    let redButton: redButtons
-    let greenButton: greenButtons
-    let status: statusLabels
-}
+//struct ViewComponents {
+//    let redButton: redButtons
+//    let greenButton: greenButtons
+//    let status: statusLabels
+//}
 
 class HomeViewController: UIViewController {
     
@@ -61,7 +61,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var blueButton: UIButton!
     
     var userPhase = 1 //1 for healthy, 2 for at risk, 3 for infected
-    var vComp = ViewComponents(redButton: redButtons.infected, greenButton: greenButtons.tested, status: statusLabels.healthy)
+    //var vComp = ViewComponents(redButton: redButtons.infected, greenButton: greenButtons.tested, status: statusLabels.healthy)
     
     let cBrain = ContactTracingBrain()
     let qBrain = QuarantineBrain()
@@ -73,28 +73,104 @@ class HomeViewController: UIViewController {
         switch userPhase {
         case 1: //start infection
             beginInfection()
-            userPhase = 3
+            changeUserPhase(to: 3)
         case 2: //start infection
             beginInfection()
-            userPhase = 3
+            changeUserPhase(to: 3)
         case 3: //call 911
             call911()
         default: print("Eat dirt")
                 
         }
     }
+
+    @IBAction func greenButtonClicked(_ sender: Any) {
+        print("\nThe user phase is: \(userPhase)")
+        
+        switch userPhase {
+            case 1: //start infection
+                goGetTested()
+            case 2: //start infection
+                beginInfection()
+                changeUserPhase(to: 3)
+            case 3: //report recovery
+                userRecovered()
+                changeUserPhase(to: 1)
+            default: print("Eat dirt")
+        
+        }
+          
+    }
     
+    @IBAction func blueButtonClicked(_ sender: Any) {
+        beginQuarantine()
+    }
+    
+    func changeUserPhase(to: Int) {
+        print("changeUserPhase to \(to)")
+        
+        userPhase = to
+        
+        print("userPhase is now \(userPhase)")
+        updateButtons()
+    }
+    
+    func updateButtons() {
+        switch userPhase {
+            case 1:
+                redButton.setTitle( redButtons.infected.rawValue , for: .normal )
+                greenButton.setTitle(greenButtons.tested.rawValue , for: .normal)
+                blueButton.isHidden = false
+                qLabel1.isHidden = true
+                qLabel2.isHidden = true
+                home1Label.text = statusLabels.healthy.rawValue
+            case 2:
+                redButton.setTitle( redButtons.infected.rawValue , for: .normal )
+                greenButton.setTitle(greenButtons.tested.rawValue , for: .normal)
+                blueButton.isHidden = true
+                qLabel1.isHidden = false
+                qLabel2.isHidden = false
+                home1Label.text = statusLabels.quarantined.rawValue
+            case 3:
+                redButton.setTitle( redButtons.emergency.rawValue , for: .normal )
+                greenButton.setTitle(greenButtons.recovery.rawValue , for: .normal)
+                blueButton.isHidden = true
+                qLabel1.isHidden = false
+                qLabel2.isHidden = false
+                home1Label.text = statusLabels.infected.rawValue
+            default:
+                print("something went wrong in switch updateButtons")
+                print("userPhase: \(userPhase)")
+        }
+    }
+    
+    func goGetTested() {
+        print("go get tested!")
+    }
+    
+    func beginQuarantine() {
+        //qBrain.startCountdown()
+        changeUserPhase(to: 2)
+        
+        cBrain.isQuarantined = true
+        
+        blueButton.isHidden = true //hide the blue button
+        qLabel1.isHidden = false
+        qLabel2.isHidden = false
+        //change view buttons
+    }
     
     func beginInfection() {
+        print("beginning infection")
         cBrain.isInfected = true //mark user infected
         //send data to the server to notify other users
         //start a quarantine
-        blueButton.isHidden = true //hide the blue button
-        //show the quarantine countdown info
-        flipQLabels()
+        beginQuarantine()
+
     }
     
     func call911() {
+        print("Im calling 911")
         //we won't actually have their phone call 911
         //perhaps we'll do a modal that asks the user if they are sure
         //create modal
@@ -107,71 +183,34 @@ class HomeViewController: UIViewController {
         //                //create dismiss button for modal
     }
     
-    func flipQLabels() {
-        qLabel1.isHidden = !qLabel1.isHidden
-        qLabel2.isHidden = !qLabel2.isHidden
-    }
-    
-    @IBAction func greenButtonClicked(_ sender: Any) {
-        switch userPhase {
-        case 1: //start infection
-            goGetTested()
-        case 2: //start infection
-            beginInfection()
-            userPhase = 3
-        case 3: //call 911
-            call911()
-        default: print("Eat dirt")
-                
-        }
-    }
-    
-    func goGetTested() {
+    func userRecovered() {
         
     }
     
-    @IBAction func beginQuarantineClicked(_ sender: Any) {
-        //qBrain.startCountdown()
-        cBrain.isQuarantined = true
-        blueButton.isHidden = true //hide the blue button
-        flipQLabels()
-        //change view buttons
+    func quarantineEnded() { //may need to make this an @objc function
+        
     }
-    
-    
-//    @IBAction func recoveryClicked(_ sender: Any) {
-//        //unmark user infected
-//        //update database
-//        //stop quarantine(?)
-//        //change the view buttons
-//        //blueButton.isHidden = false
-//        //
-//    }
     
     @objc func updateCounter() {
-        
+        //qLabel2.text = "Days Left: " + cBrain.daysLeft
     }
     
     @objc func countdownCompleted() {
         
     }
     
-    func changeButtonText(from: String, to: String) {
-        //determine which button to change
-        //if redButton
-        //button.setTitle("my text here", for: .normal)
-        //if greenButton
-        //button.setTitle("my text here", for: .normal)
-        //if blueButton
-    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //get userdefaults into struct
+        //home1Label.text = vComp.status.rawValue
+        
+        home1Label.text = statusLabels.healthy.rawValue
+        
         blueButton.setTitle( "Begin Quarantine" , for: .normal )
         blueButton.isHidden = false
-        home1Label.text = vComp.status.rawValue
+
         qLabel1.isHidden = true
         qLabel2.isHidden = true
         
