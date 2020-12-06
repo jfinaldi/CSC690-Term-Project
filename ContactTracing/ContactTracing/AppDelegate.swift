@@ -10,15 +10,27 @@ import UserNotifications
 import PushKit
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
-//	func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-//		print("token: \(deviceToken)")
-//	}
-//
-//	func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-//		print("error: \(error)")
-//	}
+	func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+		let token = deviceToken.map{String(format: "%02.2hhx", $0)}.joined()
+		print("token: \(token)")
+	}
+
+	func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+		print("error: \(error)")
+	}
+	
+	func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+		completionHandler([.banner, .sound])
+	}
+	
+	func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+		if response.notification.request.identifier == "" {
+			print("handling")
+		}
+		completionHandler()
+	}
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
