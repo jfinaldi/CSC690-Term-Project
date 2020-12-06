@@ -160,6 +160,7 @@ class HomeViewController: UIViewController {
         //change view buttons
     }
     
+	//Leslie called dib on this
     func beginInfection() {
         print("beginning infection")
         cBrain.isInfected = true //mark user infected
