@@ -13,9 +13,6 @@ Overview: Uses location tracking in the iPhone to easily keep track of other pho
 
 # Features
 ## Must have:
-- Display a list of the (appleIDs?) of the other phones that user came in contact with
-
-- Modify list to output different data according to what the user wants (x days ago, etc)
 
 - Push notification tells user if they have come in contact with an infected individual and may need to quarantine. 
 
