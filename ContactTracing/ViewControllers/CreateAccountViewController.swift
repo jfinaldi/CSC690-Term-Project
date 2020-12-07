@@ -11,16 +11,27 @@ class CreateAccountViewController: UIViewController {
 
     @IBOutlet weak var createAccountLabel: UILabel!
     @IBOutlet weak var uploadPicButton: UIButton!
-    @IBOutlet weak var username: UITextField!
-    @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var username: UITextField! = nil
+    @IBOutlet weak var password: UITextField! = nil
     
     
     
     @IBAction func submitClicked(_ sender: Any) {
         //make sure we have a username
+        guard username.text != "" else {
+            print("No username entered")
+            return
+        }
         //make sure we have a password
-        //photo not mandatory
+        guard password.text != "" else {
+            print("No password entered")
+            return
+        }
+        
         //send username and password to database
+        
+        //segue back into login
+        self.performSegue(withIdentifier: "CreateToLogin", sender: self)
     }
     
     override func viewDidLoad() {

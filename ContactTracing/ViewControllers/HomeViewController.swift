@@ -91,8 +91,7 @@ class HomeViewController: UIViewController {
             case 1: //start infection
                 goGetTested()
             case 2: //start infection
-                beginInfection()
-                changeUserPhase(to: 3)
+                goGetTested()
             case 3: //report recovery
                 userRecovered()
                 changeUserPhase(to: 1)
@@ -155,10 +154,7 @@ class HomeViewController: UIViewController {
         
         cBrain.isQuarantined = true
         
-        blueButton.isHidden = true //hide the blue button
-        qLabel1.isHidden = false
-        qLabel2.isHidden = false
-        //change view buttons
+        updateButtons()
     }
     
 	//Leslie called dib on this
@@ -171,6 +167,7 @@ class HomeViewController: UIViewController {
 
     }
     
+    //LESLIE
     func call911() {
         print("Im calling 911")
         //we won't actually have their phone call 911
