@@ -131,6 +131,23 @@ con.connect((err) => {
     //save user location req(username: string, login_token: int, latitude: double, longtitude: double) res()
     app.post('/loglocation', (req, res) => {
         // insert username, location to location
+        if (req.body.username && req.body.login_token) {
+            con.query(`SELECT login_token, user_id FROM user WHERE username=?`, [req.body.username], (err, result) => {
+                if (err) throw err
+                console.log(result[0].login_token)
+                if (result[0].login_token === req.body.login_token) {
+                    con.query(`INSERT INTO location (user_id,latitude,longtitude,time,infected) VALUES(${result[0].user_id}, '${req.body.latitude}', '${req.body.longtitude}', NOW(), 0)`, (err, result) => {
+                        if (err) throw err
+                        console.log(result)
+                        res.send(result)
+                    })
+                } else {
+                    res.status(500).send({ error: 'invalid session' })
+                }
+            })
+        } else {
+            res.status(500).send({ error: 'invalid session' })
+        }
     })
 
     //report infection and notify other users req(username: string, login_token: int)
