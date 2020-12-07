@@ -80,7 +80,11 @@ con.connect((err) => {
                     // password matches -> create login token, return success
                     var token = Date.now()
                     console.log(token)
-                    con.query(`UPDATE user SET login_token = '${token}', device_token = '${req.body.device_token}' WHERE username = '${req.body.username}'`)
+                    if (req.body.device_token) {
+                        con.query(`UPDATE user SET login_token = '${token}', device_token = '${req.body.device_token}' WHERE username = '${req.body.username}'`)   
+                    } else {
+                        con.query(`UPDATE user SET login_token = '${token}' WHERE username = '${req.body.username}'`)
+                    }
                     res.send({
                         token: token
                     })
