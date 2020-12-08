@@ -17,7 +17,7 @@ struct DataModelServices {
     func login(username: String, password: String, device_token: String, callback: @escaping (String) -> Void) {
         
         // Prepare URL
-        let url = URL(string: "http://localhost:4000/login")
+        let url = URL(string: "https://localhost:4000/login")
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object
         var request = URLRequest(url: requestUrl)
