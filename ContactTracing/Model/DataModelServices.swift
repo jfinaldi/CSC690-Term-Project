@@ -16,17 +16,10 @@ struct DataModelServices {
     
     func login(username: String, password: String, device_token: String, callback: @escaping (String) -> Void) {
         
-        // Prepare URL
-        let url = URL(string: "http://localhost:4000/login")
-        guard let requestUrl = url else { fatalError() }
-        // Prepare URL Request Object
-        var request = URLRequest(url: requestUrl)
-        request.httpMethod = "POST"
-        
         // HTTP Request Parameters which will be sent in HTTP Request Body
         let postString = "username=\(username)&password=\(password)&device_token=\(device_token)";
         // Set HTTP Request Body
-        request.httpBody = postString.data(using: String.Encoding.utf8);
+        let request = self.postRequest(methodName: "login", postString: postString)
         // Perform HTTP Request
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
@@ -55,22 +48,46 @@ struct DataModelServices {
     }
     
     
+    //app signup req(username: string, password: string) res(success: bool)
+    
+    func signup(username: String, password: String, callback: @escaping () -> Void) {
+        
+        // HTTP Request Parameters which will be sent in HTTP Request Body
+        let postString = "username=\(username)&password=\(password)";
+        // Set HTTP Request Body
+        let request = self.postRequest(methodName: "signup", postString: postString)
+        // Perform HTTP Request
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            
+            // Check for Error
+            if let error = error {
+                print("Error took place \(error)")
+                return
+            }
+            
+            // check HTTP Response
+            guard let response = response as? HTTPURLResponse,
+                (200...299).contains(response.statusCode) else {
+                    print ("server error")
+                    return
+            }
+            
+        }
+        task.resume()
+        
+    }
+    
+    
     //get locations of the user req(username: string, login_token: int) res(locations: [Location])
     // "https://localhost:4000/getLocation"
     
     func getLocation(username: String, login_token: String, callback: @escaping (LocationObject) -> Void) {
         
-        // Prepare URL
-        let url = URL(string: "http://localhost:4000/getLocation")
-        guard let requestUrl = url else { fatalError() }
-        // Prepare URL Request Object
-        var request = URLRequest(url: requestUrl)
-        request.httpMethod = "POST"
-        
         // HTTP Request Parameters which will be sent in HTTP Request Body
         let postString = "username=\(username)&login_token=\(login_token)";
         // Set HTTP Request Body
-        request.httpBody = postString.data(using: String.Encoding.utf8);
+        let request = self.postRequest(methodName: "getLocation", postString: postString)
         // Perform HTTP Request
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
@@ -112,17 +129,10 @@ struct DataModelServices {
     
     func logLocation(username: String, login_token: String, latitude: Double, longtitude: Double, callback: @escaping () -> Void) {
         
-        // Prepare URL
-        let url = URL(string: "http://localhost:4000/logLocation")
-        guard let requestUrl = url else { fatalError() }
-        // Prepare URL Request Object
-        var request = URLRequest(url: requestUrl)
-        request.httpMethod = "POST"
-        
         // HTTP Request Parameters which will be sent in HTTP Request Body
         let postString = "username=\(username)&login_token=\(login_token)&latitude=\(latitude)&longtitude=\(longtitude)";
         // Set HTTP Request Body
-        request.httpBody = postString.data(using: String.Encoding.utf8);
+        let request = self.postRequest(methodName: "logLocation", postString: postString)
         // Perform HTTP Request
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
@@ -140,6 +150,20 @@ struct DataModelServices {
             
         }
         task.resume()
+    }
+    
+    // Helping method that prepare URL
+    func postRequest(methodName: String, postString: String) -> URLRequest {
+        let url = URL(string: "http://localhost:4000/\(methodName)")
+        guard let requestUrl = url else { fatalError() }
+        // Prepare URL Request Object
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "POST"
+        
+        // Set HTTP Request Body
+        request.httpBody = postString.data(using: String.Encoding.utf8);
+        
+        return request
         
     }
 }
