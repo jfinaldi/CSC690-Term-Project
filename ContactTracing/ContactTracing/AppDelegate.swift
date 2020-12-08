@@ -30,6 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 			print("handling")
 		}
 		completionHandler()
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        //Post a notification to the Home VC to output modal
 	}
 
 
