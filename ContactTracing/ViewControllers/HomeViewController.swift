@@ -3,7 +3,11 @@
 //  ContactTracing
 //
 //  Created by Jennifer Finaldi on 11/23/20.
+//  Map related code attributed to the following links:
+//  https://stackoverflow.com/questions/25296691/get-users-current-location-coordinates
+//  https://medium.com/@kiransjadhav111/corelocation-map-kit-get-the-users-current-location-set-a-pin-in-swift-edb12f9166b2
 //
+import CoreLocation
 import MapKit
 import UIKit
 
@@ -49,7 +53,7 @@ enum statusLabels: String, CaseIterable, CustomStringConvertible {
 //    let status: statusLabels
 //}
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var home1Label: UILabel!
     @IBOutlet weak var qLabel1: UILabel!
@@ -64,14 +68,25 @@ class HomeViewController: UIViewController {
     var daysLeft: Int = 14
     //var vComp = ViewComponents(redButton: redButtons.infected, greenButton: greenButtons.tested, status: statusLabels.healthy)
     
+    let locationManager = CLLocationManager()
     let cBrain = ContactTracingBrain()
     let qBrain = QuarantineBrain()
     var userDefaults = UserDefaults.standard
+    var currentLocation = CLLocationCoordinate2D()
     
     @IBOutlet weak var map1: MKMapView!
     
- 
+    let MapView: MKMapView = {
+        let map = MKMapView()
+        map.isZoomEnabled = true
+        map.isScrollEnabled = true
+        map.isUserInteractionEnabled = true
+        return map
+
+    }()
+    
     @IBAction func redButtonClicked(_ sender: Any) {
+        
         switch userPhase {
         case 1: //start infection
             beginInfection()
@@ -87,6 +102,7 @@ class HomeViewController: UIViewController {
     }
 
     @IBAction func greenButtonClicked(_ sender: Any) {
+        
         print("\nThe user phase is: \(userPhase)")
         
         switch userPhase {
@@ -208,11 +224,43 @@ class HomeViewController: UIViewController {
         
     }
     
+    //Map code attributed to link 1 in header
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        self.currentLocation = locValue
     
+    
+        //Map code attributed to link 2 in header
+        let mUserLocation:CLLocation = locations[0] as CLLocation
+        let center = CLLocationCoordinate2D(latitude: mUserLocation.coordinate.latitude, longitude: mUserLocation.coordinate.longitude)
+        let mRegion = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        map1.setRegion(mRegion, animated: true)
+
+        //Map code attributed to link 2 in header
+        // Get user's Current Location and Drop a pin
+        let mkAnnotation: MKPointAnnotation = MKPointAnnotation()
+        mkAnnotation.coordinate = CLLocationCoordinate2DMake(mUserLocation.coordinate.latitude, mUserLocation.coordinate.longitude)
+        map1.addAnnotation(mkAnnotation)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //get userdefaults into struct
+        
+        //Map code attributed to link 1 in header
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            //locationManager.allowsBackgroundLocationUpdates = true
+            locationManager.startUpdatingLocation()
+            //locationManager.requestLocation()
+        }
+        map1.setCenter(self.currentLocation, animated: false)
+        
         
         //check the quarantine days left
         //daysLeft
@@ -238,5 +286,6 @@ class HomeViewController: UIViewController {
 //                                               name: QuarantineBrain.qCounterFinished,
 //                                               object: nil)
     }
+
     
 }
