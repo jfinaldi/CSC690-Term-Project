@@ -94,6 +94,12 @@ struct DataModelServices {
     }
     
     
+    // log location
+    //req(username: string, login_token: string, latitude: double, longtitude: double) res()
     
+    func logLocation(username: String, login_token: String, latitude: Double, longtitude: Double, callback: @escaping () -> Void) {
+        
+        
+    }
 }
 
