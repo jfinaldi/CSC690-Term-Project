@@ -64,8 +64,8 @@ class LoginViewController: UIViewController {
         //get user defaults
         userDefaults = UserDefaults.standard
         
-        //loginToken = "1607222910103"
-        loginToken = userDefaults.string(forKey: "login_token")
+        loginToken = "1607222910103"
+        //loginToken = userDefaults.string(forKey: "login_token")
         
         //if there is a token then segue into home VC
         //if loginToken != nil {
