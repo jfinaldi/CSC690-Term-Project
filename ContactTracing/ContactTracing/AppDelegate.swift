@@ -30,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 			print("handling")
 		}
 		completionHandler()
+		UIApplication.shared.applicationIconBadgeNumber = 0
 	}
 
 
@@ -41,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 		})
 		
 		UIApplication.shared.registerForRemoteNotifications()
-		
+		UIApplication.shared.applicationIconBadgeNumber = 0
         return true
     }
 

@@ -56,7 +56,7 @@ con.connect((err) => {
         }
     })
 
-    //app login req(username: string, password: string, device_token: string) res(login_token: int)
+    //app login req(username: string, password: string, device_token: string) res(login_token: string)
     app.post('/login', (req, res) => {
         // fetch password from user
         console.log({
@@ -100,8 +100,8 @@ con.connect((err) => {
         })
     })
 
-    //get locations of the user req(username: string, login_token: int) res(locations: [Location])
-    app.post('/getLocations', (req, res) => {
+    //get locations of the user req(username: string, login_token: string) res(locations: [Location])
+    app.post('/getLocation', (req, res) => {
         console.log({
             endpoint: '/getLocations',
             username: req.body.username,
@@ -128,7 +128,7 @@ con.connect((err) => {
         }
     })
 
-    //save user location req(username: string, login_token: int, latitude: double, longtitude: double) res()
+    //save user location req(username: string, login_token: string, latitude: double, longtitude: double) res()
     app.post('/loglocation', (req, res) => {
         // insert username, location to location
         if (req.body.username && req.body.login_token) {
@@ -150,7 +150,7 @@ con.connect((err) => {
         }
     })
 
-    //report infection and notify other users req(username: string, login_token: int)
+    //report infection and notify other users req(username: string, login_token: string)
     app.post('/report', (req, res) => {
         // fetch all location of user from location
 
