@@ -86,6 +86,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     }()
     
     @IBAction func redButtonClicked(_ sender: Any) {
+        
         switch userPhase {
         case 1: //start infection
             beginInfection()
@@ -101,6 +102,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     }
 
     @IBAction func greenButtonClicked(_ sender: Any) {
+        
         print("\nThe user phase is: \(userPhase)")
         
         switch userPhase {
@@ -253,7 +255,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            //locationManager.allowsBackgroundLocationUpdates = true
             locationManager.startUpdatingLocation()
+            //locationManager.requestLocation()
         }
         map1.setCenter(self.currentLocation, animated: false)
         
