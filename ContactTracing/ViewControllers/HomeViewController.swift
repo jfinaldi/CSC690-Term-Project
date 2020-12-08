@@ -61,6 +61,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var blueButton: UIButton!
     
     var userPhase = 1 //1 for healthy, 2 for at risk, 3 for infected
+    var daysLeft: Int = 14
     //var vComp = ViewComponents(redButton: redButtons.infected, greenButton: greenButtons.tested, status: statusLabels.healthy)
     
     let cBrain = ContactTracingBrain()
@@ -212,6 +213,9 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         //get userdefaults into struct
+        
+        //check the quarantine days left
+        //daysLeft
         
         //home1Label.text = vComp.status.rawValue
         
