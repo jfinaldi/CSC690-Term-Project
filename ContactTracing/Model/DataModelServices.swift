@@ -100,6 +100,7 @@ struct DataModelServices {
     func logLocation(username: String, login_token: String, latitude: Double, longtitude: Double, callback: @escaping () -> Void) {
        
         // Wameedh's comment
+        print("WAMEEDH!!")
         
     }
 }
