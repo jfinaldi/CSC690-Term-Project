@@ -30,7 +30,7 @@ class ContactTracingBrain {
     
     //function to start a quarantine
     //function to mark infected/recovered
-    //function to call 911(?)
+    //function to call 911
     
     //function to pull all the gps coordinates of infected users
     
