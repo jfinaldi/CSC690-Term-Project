@@ -61,10 +61,12 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var blueButton: UIButton!
     
     var userPhase = 1 //1 for healthy, 2 for at risk, 3 for infected
+    var daysLeft: Int = 14
     //var vComp = ViewComponents(redButton: redButtons.infected, greenButton: greenButtons.tested, status: statusLabels.healthy)
     
     let cBrain = ContactTracingBrain()
     let qBrain = QuarantineBrain()
+    var userDefaults = UserDefaults.standard
     
     @IBOutlet weak var map1: MKMapView!
     
@@ -148,6 +150,14 @@ class HomeViewController: UIViewController {
         print("go get tested!")
     }
     
+    @objc func updateQuarantineDays() {
+        guard let days = cBrain.quarantineDaysLeft else {
+            print("We don't have any quarantine days left")
+            return
+        }
+        qLabel2.text = "Days Left: \(days)"
+    }
+    
     func beginQuarantine() {
         //qBrain.startCountdown()
         changeUserPhase(to: 2)
@@ -203,15 +213,21 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         //get userdefaults into struct
+        
+        //check the quarantine days left
+        //daysLeft
+        
         //home1Label.text = vComp.status.rawValue
         
-        home1Label.text = statusLabels.healthy.rawValue
+        updateButtons()
         
-        blueButton.setTitle( "Begin Quarantine" , for: .normal )
-        blueButton.isHidden = false
-
-        qLabel1.isHidden = true
-        qLabel2.isHidden = true
+//        home1Label.text = statusLabels.healthy.rawValue
+//
+//        blueButton.setTitle( "Begin Quarantine" , for: .normal )
+//        blueButton.isHidden = false
+//
+//        qLabel1.isHidden = true
+//        qLabel2.isHidden = true
         
 
         //add our notifications

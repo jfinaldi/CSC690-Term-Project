@@ -29,6 +29,9 @@ class CreateAccountViewController: UIViewController {
         }
         
         //send username and password to database
+        DispatchQueue.global().async { [self] in
+            //call a function inside DataModelServices to register
+        }
         
         //segue back into login
         self.performSegue(withIdentifier: "CreateToLogin", sender: self)

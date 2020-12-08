@@ -9,33 +9,41 @@ import Foundation
 
 struct User: Codable {
     // Create Obj -> USER:
-       //            `username` -> string
-       //            `password` -> string
-       //            `login_token` // Save in user_def -> int
-       //            `device_token`// Save in user_def -> string
+    //            `username` -> string
+    //            `password` -> string
+    //            `login_token` // Save in user_def -> int
+    //            `device_token`// Save in user_def -> string
     
     let username: String
     var password: String = ""
     var device_token: String
     var login_token: String
     
+    
+    init(username: String, password: String, device_token: String, login_token: String) {
+        self.username = username
+        self.password = password
+        self.device_token = device_token
+        self.login_token = login_token
+    }
+    
     enum CodingKeys: String, CodingKey {
-           case username = "username"
-           case device_token = "device_token"
-           case login_token = "login_token"
-       }
+        case username = "username"
+        case device_token = "device_token"
+        case login_token = "login_token"
+    }
     
     init(from decoder:Decoder) throws {
-             let values = try decoder.container(keyedBy: CodingKeys.self)
-             username = try values.decode(String.self, forKey: .username)
-             device_token = try values.decode(String.self, forKey: .device_token)
-             login_token = try values.decode(String.self, forKey: .login_token)
-         }
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        username = try values.decode(String.self, forKey: .username)
+        device_token = try values.decode(String.self, forKey: .device_token)
+        login_token = try values.decode(String.self, forKey: .login_token)
+    }
     
     mutating func setPassword(pass: String) {
         self.password = pass
     }
     
     
-        
+    
 }

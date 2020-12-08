@@ -32,15 +32,15 @@ struct LocationObject: Codable {
     }
     
     init(from decoder:Decoder) throws {
-           let values = try decoder.container(keyedBy: CodingKeys.self)
-           user_id = try values.decode(Int.self, forKey: .user_id)
-           latitude = try values.decode(Double.self, forKey: .latitude)
-           longtitude = try values.decode(Double.self, forKey: .longtitude)
-           time = try values.decode(String.self, forKey: .time)
-           infected = try values.decode(Bool.self, forKey: .infected)
-       }
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        user_id = try values.decode(Int.self, forKey: .user_id)
+        latitude = try values.decode(Double.self, forKey: .latitude)
+        longtitude = try values.decode(Double.self, forKey: .longtitude)
+        time = try values.decode(String.self, forKey: .time)
+        infected = try values.decode(Bool.self, forKey: .infected)
+    }
     
-   
+    
     //formatter.dateFormat = "HH:mm E, d MMM y"
     
     func getDate() -> Date? {
