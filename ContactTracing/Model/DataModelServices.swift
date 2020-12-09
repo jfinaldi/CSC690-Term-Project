@@ -171,10 +171,22 @@ struct DataModelServices {
         request.httpMethod = "POST"
         
         // HTTP Request Parameters which will be sent in HTTP Request Body
-        let jsonBody = "{\"username\":\"" + username + "\",\"login_token\":\"" + login_token + "\",\"latitude\":\"" + latitude + "\",\"longtitude\":\"" + longtitude + "\"}"
-        print(jsonBody)
+		/*
+		let jsonBody = "{\"username\":\"" + username + "\",\"login_token\":\"" + login_token + "\",\"latitude\":\"" + latitude + "\",\"longtitude\":\"" + longtitude + "\"}"
+*/
+		
+		let param : [String: Any] = [
+			"username": username,
+			"login_token": login_token,
+			"latitude": latitude,
+			"longtitude": longtitude
+		]
+        //print(jsonBody)
+		
+		guard let body = try? JSONSerialization.data(withJSONObject: param, options: []) else {return}
+		
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = jsonBody.data(using: String.Encoding.utf8)
+        request.httpBody = body
         
         // Perform HTTP Request
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -230,6 +242,8 @@ struct DataModelServices {
 			}
 			
 			print(response)
-		}.resume()
+		}
+		
+		task.resume()
 	}
 }
