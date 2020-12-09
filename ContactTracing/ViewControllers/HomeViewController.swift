@@ -236,24 +236,22 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         alert.addAction(action)
     }
     
-    //Map code attributed to link 1 in header
+    //Map code attributed to link 2 in header
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
-        self.currentLocation = locValue
-    
-    
-        //Map code attributed to link 2 in header
+        
+        //Get the user's location and center the map around it
         let mUserLocation:CLLocation = locations[0] as CLLocation
         let center = CLLocationCoordinate2D(latitude: mUserLocation.coordinate.latitude, longitude: mUserLocation.coordinate.longitude)
+        self.currentLocation = center
         let mRegion = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         map1.setRegion(mRegion, animated: true)
 
-        //Map code attributed to link 2 in header
         // Get user's Current Location and Drop a pin
         let mkAnnotation: MKPointAnnotation = MKPointAnnotation()
         mkAnnotation.coordinate = CLLocationCoordinate2DMake(mUserLocation.coordinate.latitude, mUserLocation.coordinate.longitude)
         map1.addAnnotation(mkAnnotation)
+        
+        locationManager.stopUpdatingLocation()
     }
 
     override func viewDidLoad() {
@@ -272,9 +270,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            //locationManager.allowsBackgroundLocationUpdates = true
+            locationManager.allowsBackgroundLocationUpdates = true
             locationManager.startUpdatingLocation()
-            //locationManager.requestLocation()
         }
         map1.setCenter(self.currentLocation, animated: false)
         
