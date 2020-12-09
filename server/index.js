@@ -147,6 +147,7 @@ con.connect((err) => {
 
     //save user location req(username: string, login_token: string, latitude: double, longtitude: double) res()
     app.post('/loglocation', (req, res) => {
+        console.log(`${req.body.username} loging location`);
         // insert username, location to location
         if (req.body.username && req.body.login_token) {
             con.query(`SELECT login_token, user_id FROM user WHERE username=?`, [req.body.username], (err, result) => {
@@ -169,6 +170,7 @@ con.connect((err) => {
 
     //report infection and notify other users req(username: string, login_token: string)
     app.post('/report', (req, res) => {
+        console.log(`${req.body.username} reporting infection`);
         // fetch all location of user from location
         var users = []
         if (req.body.username && req.body.login_token) {

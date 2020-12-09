@@ -20,6 +20,7 @@
 		3B07584B256C7E0D00988D2A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B07584A256C7E0D00988D2A /* LoginViewController.swift */; };
 		3BADCC5025730A7400EE1702 /* ContactTracingBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BADCC4F25730A7400EE1702 /* ContactTracingBrain.swift */; };
 		3BEC2E592575C5650009C1F6 /* QuarantineBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEC2E582575C5650009C1F6 /* QuarantineBrain.swift */; };
+		3CB795A02580D4BD002D4DA8 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB7959F2580D4BD002D4DA8 /* Alert.swift */; };
 		A3DAEA9D2579CACE0085783B /* UserObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DAEA9C2579CACE0085783B /* UserObject.swift */; };
 		A3DAEA9F2579CD240085783B /* DataModelServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DAEA9E2579CD240085783B /* DataModelServices.swift */; };
 		A3DAEAA3257EEFC10085783B /* LocationObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DAEAA2257EEFC10085783B /* LocationObject.swift */; };
@@ -63,6 +64,7 @@
 		3BADCC4F25730A7400EE1702 /* ContactTracingBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTracingBrain.swift; sourceTree = "<group>"; };
 		3BEC2E582575C5650009C1F6 /* QuarantineBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuarantineBrain.swift; sourceTree = "<group>"; };
 		3C7FBD9925773C7000FF9066 /* ContactTracing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ContactTracing.entitlements; sourceTree = "<group>"; };
+		3CB7959F2580D4BD002D4DA8 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		A3DAEA9C2579CACE0085783B /* UserObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObject.swift; sourceTree = "<group>"; };
 		A3DAEA9E2579CD240085783B /* DataModelServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModelServices.swift; sourceTree = "<group>"; };
 		A3DAEAA2257EEFC10085783B /* LocationObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationObject.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 		3BEC2E5E2575C5A90009C1F6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3CB7959F2580D4BD002D4DA8 /* Alert.swift */,
 				3BEC2E582575C5650009C1F6 /* QuarantineBrain.swift */,
 				3BADCC4F25730A7400EE1702 /* ContactTracingBrain.swift */,
 				A3DAEA9C2579CACE0085783B /* UserObject.swift */,
@@ -314,6 +317,7 @@
 				3BADCC5025730A7400EE1702 /* ContactTracingBrain.swift in Sources */,
 				3B07583E256C6E3200988D2A /* CreateAccountViewController.swift in Sources */,
 				3BEC2E592575C5650009C1F6 /* QuarantineBrain.swift in Sources */,
+				3CB795A02580D4BD002D4DA8 /* Alert.swift in Sources */,
 				3B07580F256C660500988D2A /* ContactTracingViewController.swift in Sources */,
 				A3DAEAA3257EEFC10085783B /* LocationObject.swift in Sources */,
 				3B07580B256C660500988D2A /* AppDelegate.swift in Sources */,

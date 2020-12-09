@@ -32,7 +32,7 @@
                                     <constraint firstAttribute="height" constant="52" id="RuO-iW-QPP"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="username"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vJZ-VY-jmC">
                                 <rect key="frame" x="20" y="172" width="374" height="52"/>
@@ -41,7 +41,7 @@
                                     <constraint firstAttribute="height" constant="52" id="RBf-NK-Yhj"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1FD-65-Bej">
                                 <rect key="frame" x="130" y="315" width="154" height="80"/>
@@ -150,7 +150,7 @@
                                     <constraint firstAttribute="height" constant="52" id="2d5-Xn-U51"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="username"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vb6-1j-bKT">
                                 <rect key="frame" x="20" y="244" width="374" height="52"/>
@@ -159,7 +159,7 @@
                                     <constraint firstAttribute="height" constant="52" id="5bA-xB-1tq"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vat-dN-vAR">
                                 <rect key="frame" x="130" y="346" width="154" height="80"/>
@@ -330,6 +330,7 @@
                         <outlet property="qLabel1" destination="WaW-HD-CNB" id="dYa-bp-SrS"/>
                         <outlet property="qLabel2" destination="ecf-zQ-xWM" id="rTm-iq-9aR"/>
                         <outlet property="redButton" destination="3mn-Tf-cYk" id="xHe-7L-nBm"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="BackToLogin" id="GYV-dN-2R9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pyk-dj-ChF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -358,7 +359,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="rTL-4N-cBx"/>
-        <segue reference="iP1-nk-EoJ"/>
+        <segue reference="GYV-dN-2R9"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">

@@ -193,9 +193,17 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         print("beginning infection")
         cBrain.isInfected = true //mark user infected
         //send data to the server to notify other users
+		if let user = userDefaults.string(forKey: "username"),
+		   let loginToken = userDefaults.string(forKey: "login_token"){
+			DataModelServices().reportInfection(username: user, login_token: loginToken)
+		} else {
+			print("not logged in")
+			performSegue(withIdentifier: "BackToLogin", sender: self)
+		}
+		
         //start a quarantine
         beginQuarantine()
-
+		Alert.showBasicAlert(on: self, with: "You dumb dumb haven't been wearing mask ehh!?", message: "We have to notify bunch of unlucky bastards that they might have gotten covid now. You better stay inside and not fuck this up any further!!!")
     }
     
     //LESLIE
@@ -211,6 +219,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         //            //if yes, output modal that says help on the way
         //                //create modal
         //                //create dismiss button for modal
+		Alert.showCallAlert(on: self, with: "Are you sure you want to call 911?", message: "There's no backing out if you tap yes.")
     }
     
     func userRecovered() {

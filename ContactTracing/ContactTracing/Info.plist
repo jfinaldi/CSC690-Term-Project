@@ -56,7 +56,13 @@
 	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
+<<<<<<< HEAD
 		<string>location</string>
+=======
+		<string>fetch</string>
+		<string>location</string>
+		<string>processing</string>
+>>>>>>> 88b9590c55b7e9253233b5ed3acc8a4d11815eab
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
