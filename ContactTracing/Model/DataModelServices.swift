@@ -4,7 +4,6 @@
 //
 //  Created by Wameedh Mohammed Ali on 12/3/20.
 //
-
 import Foundation
 
 struct DataModelServices {
@@ -16,27 +15,16 @@ struct DataModelServices {
     
     func login(username: String, password: String, device_token: String, callback: @escaping (String) -> Void) {
         
-        var requestBodyComponents = URLComponents()
-        
-        requestBodyComponents.queryItems = [
-            URLQueryItem(name: "username", value: username),
-            URLQueryItem(name: "password", value: password),
-            URLQueryItem(name: "device_token", value: device_token),
-        ]
-        
-        
-        var request = URLRequest(url: URL(string:"http://localhost:4000/login")!)
+        let url = URL(string: "http://localhost:4000/login")
+        guard let requestUrl = url else { fatalError() }
+        // Prepare URL Request Object
+        var request = URLRequest(url: requestUrl)
         request.httpMethod = "POST"
-        request.httpBody = requestBodyComponents.query?.data(using: .utf8)
-        
         // HTTP Request Parameters which will be sent in HTTP Request Body
-        //let postString = "username=\(username)&password=\(password)&device_token=\(device_token)";
-        //print("postString: \(postString)")
+        let postString = "username=\(username)&password=\(password)&device_token=\(device_token)";
+        
         // Set HTTP Request Body
-        //var request = self.postRequest(methodName: "login", postString: postString)
-        print("the request is: ")
-        print(request)
-        print("that was the request")
+        request.httpBody = postString.data(using: String.Encoding.utf8);
         // Perform HTTP Request
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
@@ -69,10 +57,15 @@ struct DataModelServices {
     
     func signup(username: String, password: String, callback: @escaping () -> Void) {
         
+        let url = URL(string: "http://localhost:4000/signup")
+        guard let requestUrl = url else { fatalError() }
+        // Prepare URL Request Object
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "POST"
         // HTTP Request Parameters which will be sent in HTTP Request Body
         let postString = "username=\(username)&password=\(password)";
         // Set HTTP Request Body
-        let request = self.postRequest(methodName: "signup", postString: postString)
+        request.httpBody = postString.data(using: String.Encoding.utf8);
         // Perform HTTP Request
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
@@ -100,11 +93,16 @@ struct DataModelServices {
     // "https://localhost:4000/getLocation"
     
     func getLocation(username: String, login_token: String, callback: @escaping (LocationObject) -> Void) {
+        let url = URL(string: "http://localhost:4000/getLocation")
+        guard let requestUrl = url else { fatalError() }
+               // Prepare URL Request Object
+        var request = URLRequest(url: requestUrl)
+               request.httpMethod = "POST"
         
         // HTTP Request Parameters which will be sent in HTTP Request Body
         let postString = "username=\(username)&login_token=\(login_token)";
         // Set HTTP Request Body
-        let request = self.postRequest(methodName: "getLocation", postString: postString)
+        request.httpBody = postString.data(using: String.Encoding.utf8);
         // Perform HTTP Request
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
@@ -121,7 +119,6 @@ struct DataModelServices {
             }
             
             // Convert HTTP Response Data to a String
-            
             guard let data = data else {
                 // TODO: Deal with the error if this is an error
                 return
@@ -146,10 +143,17 @@ struct DataModelServices {
     
     func logLocation(username: String, login_token: String, latitude: Double, longtitude: Double, callback: @escaping () -> Void) {
         
+        let url = URL(string: "http://localhost:4000/logLocation")
+               guard let requestUrl = url else { fatalError() }
+                      // Prepare URL Request Object
+               var request = URLRequest(url: requestUrl)
+                      request.httpMethod = "POST"
+        
         // HTTP Request Parameters which will be sent in HTTP Request Body
         let postString = "username=\(username)&login_token=\(login_token)&latitude=\(latitude)&longtitude=\(longtitude)";
         // Set HTTP Request Body
-        let request = self.postRequest(methodName: "logLocation", postString: postString)
+        request.httpBody = postString.data(using: String.Encoding.utf8);
+    
         // Perform HTTP Request
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
@@ -169,19 +173,18 @@ struct DataModelServices {
         task.resume()
     }
     
-    // Helping method that prepare URL
-    func postRequest(methodName: String, postString: String) -> URLRequest {
-        let url = URL(string: "http://localhost:4000/\(methodName)")
-        guard let requestUrl = url else { fatalError() }
-        // Prepare URL Request Object
-        var request = URLRequest(url: requestUrl)
-        request.httpMethod = "POST"
-        
-        // Set HTTP Request Body
-        request.httpBody = postString.data(using: String.Encoding.utf8);
-        
-        return request
-        
-    }
+//    // Helping method that prepare URL
+//    func postRequest(methodName: String, postString: String) -> URLRequest {
+//        let url = URL(string: "http://localhost:4000/\(methodName)")
+//        guard let requestUrl = url else { fatalError() }
+//        // Prepare URL Request Object
+//        var request = URLRequest(url: requestUrl)
+//        request.httpMethod = "POST"
+//
+//        // Set HTTP Request Body
+//        request.httpBody = postString.data(using: String.Encoding.utf8);
+//
+//        return request
+//
+//    }
 }
-
