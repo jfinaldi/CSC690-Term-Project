@@ -193,6 +193,14 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         print("beginning infection")
         cBrain.isInfected = true //mark user infected
         //send data to the server to notify other users
+		if let user = userDefaults.string(forKey: "username"),
+		   let loginToken = userDefaults.string(forKey: "login_token"){
+			DataModelServices().reportInfection(username: user, login_token: loginToken)
+		} else {
+			print("not logged in")
+			performSegue(withIdentifier: "BackToLogin", sender: self)
+		}
+		
         //start a quarantine
         beginQuarantine()
 
