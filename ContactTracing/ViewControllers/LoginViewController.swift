@@ -43,7 +43,7 @@ class LoginViewController: UIViewController {
         DispatchQueue.global().async { [self] in
             DataModelServices().login(username: name, password: pass, device_token: "", callback: {
                 loginToken in
-                //self.userDefaults.set(loginToken, forKey: "login_token")
+                self.userDefaults.set(loginToken, forKey: "login_token")
 //                DataModelServices().getLocation(username: name, login_token: loginToken, callback: { (locations) in
 //                    print(locations)
 //                })

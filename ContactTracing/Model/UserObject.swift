@@ -14,9 +14,9 @@ struct User: Codable {
     //            `login_token` // Save in user_def -> int
     //            `device_token`// Save in user_def -> string
     
-    let username: String
+    var username: String = ""
     var password: String = ""
-    var device_token: String
+    var device_token: String = ""
     var login_token: String
     
     var userDefaults = UserDefaults.standard
@@ -30,15 +30,15 @@ struct User: Codable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case username = "username"
-        case device_token = "device_token"
-        case login_token = "login_token"
+        //case username = "username"
+        //case device_token = "device_token"
+        case login_token = "token"
     }
     
     init(from decoder:Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        username = try values.decode(String.self, forKey: .username)
-        device_token = try values.decode(String.self, forKey: .device_token)
+        //username = try values.decode(String.self, forKey: .username)
+        //device_token = try values.decode(String.self, forKey: .device_token)
         login_token = try values.decode(String.self, forKey: .login_token)
     }
     
