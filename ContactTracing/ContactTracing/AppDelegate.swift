@@ -25,13 +25,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 		completionHandler([.banner, .sound])
 	}
 	
+    static let dangerMessage = Notification.Name("DangerMessage")
+    
 	func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
 		if response.notification.request.identifier == "" {
 			print("handling")
 		}
 		completionHandler()
         UIApplication.shared.applicationIconBadgeNumber = 0
+        
         //Post a notification to the Home VC to output modal
+        NotificationCenter.default.post(name: AppDelegate.dangerMessage, object: nil)
 	}
 
 

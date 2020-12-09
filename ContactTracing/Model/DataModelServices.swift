@@ -16,10 +16,27 @@ struct DataModelServices {
     
     func login(username: String, password: String, device_token: String, callback: @escaping (String) -> Void) {
         
+        var requestBodyComponents = URLComponents()
+        
+        requestBodyComponents.queryItems = [
+            URLQueryItem(name: "username", value: username),
+            URLQueryItem(name: "password", value: password),
+            URLQueryItem(name: "device_token", value: device_token),
+        ]
+        
+        
+        var request = URLRequest(url: URL(string:"http://localhost:4000/login")!)
+        request.httpMethod = "POST"
+        request.httpBody = requestBodyComponents.query?.data(using: .utf8)
+        
         // HTTP Request Parameters which will be sent in HTTP Request Body
-        let postString = "username=\(username)&password=\(password)&device_token=\(device_token)";
+        //let postString = "username=\(username)&password=\(password)&device_token=\(device_token)";
+        //print("postString: \(postString)")
         // Set HTTP Request Body
-        let request = self.postRequest(methodName: "login", postString: postString)
+        //var request = self.postRequest(methodName: "login", postString: postString)
+        print("the request is: ")
+        print(request)
+        print("that was the request")
         // Perform HTTP Request
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             

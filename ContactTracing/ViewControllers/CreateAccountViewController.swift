@@ -17,17 +17,26 @@ class CreateAccountViewController: UIViewController {
     
     
     @IBAction func submitClicked(_ sender: Any) {
-        //make sure we have a username
-        guard username.text != "" else {
-            print("No username entered")
-            return
-        }
-        //make sure we have a password
-        guard password.text != "" else {
-            print("No password entered")
+        
+        guard !(username.text!.isEmpty) && !(password.text!.isEmpty) else {
+            let alert = UIAlertController(title: "ಠ_ಠ", message: "Fill out all fields please", preferredStyle: .alert)
+            self.present(alert, animated: true)
+            let action = UIAlertAction(title: "Try Again", style: .default, handler: nil)
+            alert.addAction(action)
             return
         }
         
+//        //make sure we have a username
+//        guard username.text != "" else {
+//            print("No username entered")
+//            return
+//        }
+//        //make sure we have a password
+//        guard password.text != "" else {
+//            print("No password entered")
+//            return
+//        }
+//        
         //send username and password to database
         DispatchQueue.global().async { [self] in
             //call a function inside DataModelServices to register
@@ -39,6 +48,8 @@ class CreateAccountViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.setHidesBackButton(true, animated: false)
 
         // Do any additional setup after loading the view.
     }

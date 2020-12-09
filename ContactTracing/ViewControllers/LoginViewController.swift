@@ -11,6 +11,7 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var username: UITextField! = nil
     @IBOutlet weak var password: UITextField! = nil
+    @IBOutlet weak var errorMsg: UILabel!
     
     var loginToken: String?
     var userDefaults = UserDefaults.standard
@@ -18,11 +19,23 @@ class LoginViewController: UIViewController {
     
     @IBAction func submitClicked(_ sender: Any) {
         
-        //this is temporary
-        guard let name: String = username.text else {
+        //reset error if there is ne
+        if errorMsg.isHidden == true {
+            errorMsg.isHidden = false
+        }
+        
+        //output a modal if user leaves a field blank
+        guard !(username.text!.isEmpty) && !(password.text!.isEmpty) else {
+            let alert = UIAlertController(title: "ಠ_ಠ", message: "Fill out all fields please", preferredStyle: .alert)
+            self.present(alert, animated: true)
+            let action = UIAlertAction(title: "Try Again", style: .default, handler: nil)
+            alert.addAction(action)
             return
         }
-        guard let pass: String = password.text else {
+        
+        //this is temporary
+        guard let name: String = username.text, let pass: String = password.text else {
+            errorMsg.isHidden = false
             return
         }
         
@@ -45,6 +58,8 @@ class LoginViewController: UIViewController {
         if loginToken != nil {
             print("\n\n\nWE HAVE A LOGIN TOKEN\n\n\n")
             self.performSegue(withIdentifier: "LoginToHome", sender: self)
+        } else {
+            errorMsg.isHidden = false //output error message for fail to login
         }
     }
     
@@ -60,21 +75,17 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.setHidesBackButton(true, animated: false)
 
         //get user defaults
         userDefaults = UserDefaults.standard
         
-        loginToken = "1607222910103"
-        //loginToken = userDefaults.string(forKey: "login_token")
+        //loginToken = "1607222910103"
+        loginToken = userDefaults.string(forKey: "login_token")
         
-        //if there is a token then segue into home VC
-        //if loginToken != nil {
-            self.performSegue(withIdentifier: "LoginToHome", sender: self) //This doesn't work!
-        //}
-        
-        
-        
-        //if there is not a token then stay here
+        //make error message invisible
+        errorMsg.isHidden = true
     }
 
     
