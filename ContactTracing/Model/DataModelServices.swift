@@ -81,7 +81,7 @@ struct DataModelServices {
     
     func signup(username: String, password: String, callback: @escaping () -> Void) {
         
-        let url = URL(string: "http://localhost:4000/signup")
+        let url = URL(string: "http://18.188.195.49:4000/signup")
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object
         var request = URLRequest(url: requestUrl)
@@ -117,7 +117,7 @@ struct DataModelServices {
     // "https://localhost:4000/getLocation"
     
     func getLocation(username: String, login_token: String, callback: @escaping (LocationObject) -> Void) {
-        let url = URL(string: "http://localhost:4000/getLocation")
+        let url = URL(string: "http://18.188.195.49:4000/getLocation")
         guard let requestUrl = url else { fatalError() }
                // Prepare URL Request Object
         var request = URLRequest(url: requestUrl)
@@ -167,7 +167,7 @@ struct DataModelServices {
     
     func logLocation(username: String, login_token: String, latitude: Double, longtitude: Double, callback: @escaping () -> Void) {
         
-        let url = URL(string: "http://localhost:4000/logLocation")
+        let url = URL(string: "http://18.188.195.49:4000/logLocation")
                guard let requestUrl = url else { fatalError() }
                       // Prepare URL Request Object
                var request = URLRequest(url: requestUrl)
