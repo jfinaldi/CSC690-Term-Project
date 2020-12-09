@@ -23,8 +23,17 @@ struct DataModelServices {
         // HTTP Request Parameters which will be sent in HTTP Request Body
         let postString = "username=\(username)&password=\(password)&device_token=\(device_token)";
         
+        do {
+            let jsonData = try JSONEncoder().encode(postString)
+            request.httpBody = jsonData
+        } catch{
+            print(error)
+        }
+//        guard let jsonData = try JSONEncoder().encode(postString) else { fatalError() }
+        
+//        request.httpBody = jsonData
         // Set HTTP Request Body
-        request.httpBody = postString.data(using: String.Encoding.utf8);
+       // request.httpBody = postString.data(using: String.Encoding.utf8);
         // Perform HTTP Request
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
