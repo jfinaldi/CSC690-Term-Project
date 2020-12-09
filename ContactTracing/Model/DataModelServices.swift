@@ -33,7 +33,7 @@ struct DataModelServices {
         print(jsonBody)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = jsonBody.data(using: String.Encoding.utf8)
-
+        
         // Perform HTTP Request
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
@@ -50,14 +50,6 @@ struct DataModelServices {
                     return
             }
             
-//            // Convert HTTP Response Data to a String
-//            if let data = data, let login_token = String(data: data, encoding: .utf8) {
-//                print("im about to print an index")
-//                print(login_token.index(ofAccessibilityElement: 6))
-//                print("I printed an index")
-//                print("Response string:\n \(login_token)")
-//                callback(login_token) // return a login_token string
-//            }
             // Convert HTTP Response Data to a String
             guard let data = data else {
                 // TODO: Deal with the error if this is an error
@@ -86,10 +78,13 @@ struct DataModelServices {
         // Prepare URL Request Object
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "POST"
+        
         // HTTP Request Parameters which will be sent in HTTP Request Body
-        let postString = "username=\(username)&password=\(password)";
-        // Set HTTP Request Body
-        request.httpBody = postString.data(using: String.Encoding.utf8);
+        let jsonBody = "{\"username\":\"" + username + "\",\"password\":\"" + password + "\"}"
+        print(jsonBody)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonBody.data(using: String.Encoding.utf8)
+        
         // Perform HTTP Request
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
@@ -119,14 +114,16 @@ struct DataModelServices {
     func getLocation(username: String, login_token: String, callback: @escaping (LocationObject) -> Void) {
         let url = URL(string: "http://18.188.195.49:4000/getLocation")
         guard let requestUrl = url else { fatalError() }
-               // Prepare URL Request Object
+        // Prepare URL Request Object
         var request = URLRequest(url: requestUrl)
-               request.httpMethod = "POST"
+        request.httpMethod = "POST"
         
         // HTTP Request Parameters which will be sent in HTTP Request Body
-        let postString = "username=\(username)&login_token=\(login_token)";
-        // Set HTTP Request Body
-        request.httpBody = postString.data(using: String.Encoding.utf8);
+        let jsonBody = "{\"username\":\"" + username + "\",\"login_token\":\"" + login_token + "\"}"
+        print(jsonBody)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonBody.data(using: String.Encoding.utf8)
+        
         // Perform HTTP Request
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
@@ -168,16 +165,17 @@ struct DataModelServices {
     func logLocation(username: String, login_token: String, latitude: Double, longtitude: Double, callback: @escaping () -> Void) {
         
         let url = URL(string: "http://18.188.195.49:4000/logLocation")
-               guard let requestUrl = url else { fatalError() }
-                      // Prepare URL Request Object
-               var request = URLRequest(url: requestUrl)
-                      request.httpMethod = "POST"
+        guard let requestUrl = url else { fatalError() }
+        // Prepare URL Request Object
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "POST"
         
         // HTTP Request Parameters which will be sent in HTTP Request Body
-        let postString = "username=\(username)&login_token=\(login_token)&latitude=\(latitude)&longtitude=\(longtitude)";
-        // Set HTTP Request Body
-        request.httpBody = postString.data(using: String.Encoding.utf8);
-    
+        let jsonBody = "{\"username\":\"" + username + "\",\"login_token\":\"" + login_token + "\",\"latitude\":\"" + latitude + "\",\"longtitude\":\"" + longtitude + "\"}"
+        print(jsonBody)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonBody.data(using: String.Encoding.utf8)
+        
         // Perform HTTP Request
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
@@ -197,18 +195,4 @@ struct DataModelServices {
         task.resume()
     }
     
-//    // Helping method that prepare URL
-//    func postRequest(methodName: String, postString: String) -> URLRequest {
-//        let url = URL(string: "http://localhost:4000/\(methodName)")
-//        guard let requestUrl = url else { fatalError() }
-//        // Prepare URL Request Object
-//        var request = URLRequest(url: requestUrl)
-//        request.httpMethod = "POST"
-//
-//        // Set HTTP Request Body
-//        request.httpBody = postString.data(using: String.Encoding.utf8);
-//
-//        return request
-//
-//    }
 }
