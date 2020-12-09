@@ -37,7 +37,6 @@ struct DataModelServices {
         // Perform HTTP Request
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
-            
             // Check for Error
             if let error = error {
                 print("Error took place \(error)")

@@ -1,10 +1,12 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 const mysql = require('mysql2')
 const fs = require('fs')
 const apn = require('apn')
 
 const app = express()
-app.use(express.json())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 
 const port = process.env.PORT || 4000
 
