@@ -19,6 +19,8 @@ struct User: Codable {
     var device_token: String
     var login_token: String
     
+    var userDefaults = UserDefaults.standard
+    
     
     init(username: String, password: String, device_token: String, login_token: String) {
         self.username = username
@@ -44,6 +46,18 @@ struct User: Codable {
         self.password = pass
     }
     
+    func saveLoginToken(login_token: String){
+        self.userDefaults.set(login_token, forKey: "login_token")
+    }
+    
+    func getLoginToken() -> String {
+        if let token = self.userDefaults.string(forKey: login_token) {
+            return token
+        } else{
+            return "NO TOKEN"
+        }
+       
+    }
     
     
 }

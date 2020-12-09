@@ -86,6 +86,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     }()
     
     @IBAction func redButtonClicked(_ sender: Any) {
+        print("red button clicked")
+        print("userPhase: \(userPhase)")
         
         switch userPhase {
         case 1: //start infection
@@ -127,6 +129,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         print("changeUserPhase to \(to)")
         
         userPhase = to
+        
+        //save to userdefaults
+        self.userDefaults.set(userPhase, forKey: "userPhase")
         
         print("userPhase is now \(userPhase)")
         updateButtons()
@@ -224,6 +229,13 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
+    @objc func outputNotification() {
+        let alert = UIAlertController(title: "YOU ARE AT RISK", message: "It is highly advised to start quarantine procedures asap", preferredStyle: .alert)
+        self.present(alert, animated: true)
+        let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alert.addAction(action)
+    }
+    
     //Map code attributed to link 1 in header
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
@@ -247,7 +259,12 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //get userdefaults into struct
+        self.navigationItem.setHidesBackButton(true, animated: false)
+        
+        //get user defaults
+        userDefaults = UserDefaults.standard
+        self.userPhase = userDefaults.integer(forKey: "userPhase")
+        if userPhase == 0 { userPhase = 1 }
         
         //Map code attributed to link 1 in header
         self.locationManager.requestAlwaysAuthorization()
@@ -285,6 +302,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
 //        NotificationCenter.default.addObserver(self, selector: #selector(countdownCompleted),
 //                                               name: QuarantineBrain.qCounterFinished,
 //                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(outputNotification),
+                                               name: AppDelegate.dangerMessage,
+                                               object: nil)
     }
 
     
