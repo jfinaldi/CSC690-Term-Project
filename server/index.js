@@ -103,7 +103,7 @@ con.connect((err) => {
                         con.query(`UPDATE user SET login_token = '${token}' WHERE username = '${req.body.username}'`)
                     }
                     res.send({
-                        token: token
+                        token: token.toString()
                     })
                 } else {
                     // password not match -> return fail
