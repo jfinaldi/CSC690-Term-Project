@@ -21,22 +21,31 @@ struct DataModelServices {
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "POST"
         // HTTP Request Parameters which will be sent in HTTP Request Body
-        let postString = "username=\(username)&password=\(password)&device_token=\(device_token)";
+//        let postString =
+//        "username=\(username)&password=\(password)&device_token=\(device_token)";
         
-        do {
-            let jsonData = try JSONEncoder().encode(postString)
-            request.httpBody = jsonData
-        } catch{
-            print(error)
-        }
+        let body = [ "username": username,
+                   "password": password,
+                   "device_token": device_token]
+        
+        let postString = try? JSONSerialization.data(
+            withJSONObject: body,
+            options: []
+        )
+        
+//        do {
+//            let jsonData = try JSONEncoder().encode(postString)
+//            request.httpBody = jsonData
+//        } catch{
+//            print(error)
+//        }
 //        guard let jsonData = try JSONEncoder().encode(postString) else { fatalError() }
         
-//        request.httpBody = jsonData
+       request.httpBody = postString
         // Set HTTP Request Body
        // request.httpBody = postString.data(using: String.Encoding.utf8);
         // Perform HTTP Request
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            
             
             // Check for Error
             if let error = error {
