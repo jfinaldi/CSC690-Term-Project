@@ -119,8 +119,6 @@ struct DataModelServices {
 				print(error)
 			}
             
-            callback()
-            
         }
         task.resume()
         

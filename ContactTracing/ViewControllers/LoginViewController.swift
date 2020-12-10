@@ -67,7 +67,7 @@ class LoginViewController: UIViewController {
 	
 	override func viewDidAppear(_ animated: Bool) {
 		if let _ = userDefaults.string(forKey: "login_token"), let _ = userDefaults.string(forKey: "username") {
-			self.performSegue(withIdentifier: "LoginToHome", sender: self) //This doesn't work!
+			self.performSegue(withIdentifier: "LoginToHome", sender: self) 
 		} else {
 			
 		}
@@ -83,10 +83,8 @@ class LoginViewController: UIViewController {
 		self.navigationItem.setHidesBackButton(true, animated: false)
 		
 		//get user defaults
-		//userDefaults = UserDefaults.standard
-		
-		print(userDefaults.string(forKey: "login_token") ?? "")
-		viewDidAppear(true)
+        print(userDefaults.string(forKey: "login_token") ?? "")
+		//viewDidAppear(true)
 		
 		//loginToken = "1607222910103"
 		//loginToken = userDefaults.string(forKey: "login_token")
