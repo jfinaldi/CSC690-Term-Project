@@ -1,0 +1,4 @@
+- HOW TO RUN
+    - in server folder, change the connection password then run the following
+        - npm instaall
+        - node .
