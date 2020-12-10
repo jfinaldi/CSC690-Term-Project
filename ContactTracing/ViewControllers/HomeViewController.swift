@@ -67,6 +67,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     var userPhase = 1 //1 for healthy, 2 for at risk, 3 for infected
     var daysLeft: Int = 14
     var qStartDate: Date? = nil
+    //let maxTimeLapsed: Double = 1209600.00
+    let maxTimeLapsed: Double = 30.00
     //var vComp = ViewComponents(redButton: redButtons.infected, greenButton: greenButtons.tested, status: statusLabels.healthy)
     
     let locationManager = CLLocationManager()
@@ -213,8 +215,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         print("Time elapsed: \(timeElapsed)")
         
         //find out if 14 days has elapsed
-        if timeElapsed >= 1209600 {
-        //if timeElapsed >= 30 {  //30 SECONDS: TEMPORARY FOR TESTING!
+        if timeElapsed >= maxTimeLapsed {
             print("Quarantine is finished!")
             qTimerIsUp()//end quarantine
         }
@@ -272,6 +273,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     func userRecovered() {
         cBrain.isInfected = false
+        qTimerIsUp() //nuke the quarantine
     }
     
     func quarantineEnded() { //may need to make this an @objc function
