@@ -13,10 +13,12 @@ class CreateAccountViewController: UIViewController {
     @IBOutlet weak var uploadPicButton: UIButton!
     @IBOutlet weak var username: UITextField! = nil
     @IBOutlet weak var password: UITextField! = nil
+    @IBOutlet weak var nameTaken: UILabel!
     
     
     
     @IBAction func submitClicked(_ sender: Any) {
+        nameTaken.isHidden = true
         
         //output a modal if user leaves a field blank
         guard !(username.text!.isEmpty) && !(password.text!.isEmpty) else {
@@ -42,7 +44,7 @@ class CreateAccountViewController: UIViewController {
 						self.performSegue(withIdentifier: "CreateToLogin", sender: self)
 					}
 				} else {
-					// show a label that says "username is taken"
+                    nameTaken.isHidden = false
 				}
             })
         }
@@ -56,7 +58,7 @@ class CreateAccountViewController: UIViewController {
         
         self.navigationItem.setHidesBackButton(true, animated: false)
 
-        // Do any additional setup after loading the view.
+        nameTaken.isHidden = true
     }
     
 }
