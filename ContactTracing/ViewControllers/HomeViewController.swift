@@ -242,6 +242,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        guard qStartDate != nil else {
+            return
+        }
         isQuarantineDoneYet()
     }
     
@@ -320,10 +323,11 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         self.navigationItem.setHidesBackButton(true, animated: false)
         
         //get user defaults
-        userDefaults = UserDefaults.standard
         self.userPhase = userDefaults.integer(forKey: "userPhase")
         if userPhase == 0 { userPhase = 1 }
         self.qStartDate = userDefaults.object(forKey: "qStart") as? Date
+        
+        viewDidAppear(true)
         
         //Map code attributed to link 1 in header
         self.locationManager.requestAlwaysAuthorization()
