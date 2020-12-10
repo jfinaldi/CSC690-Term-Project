@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3B07580B256C660500988D2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B07580A256C660500988D2A /* AppDelegate.swift */; };
 		3B07580D256C660500988D2A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B07580C256C660500988D2A /* SceneDelegate.swift */; };
-		3B07580F256C660500988D2A /* ContactTracingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B07580E256C660500988D2A /* ContactTracingViewController.swift */; };
 		3B075812256C660500988D2A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B075810256C660500988D2A /* Main.storyboard */; };
 		3B075814256C660600988D2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B075813256C660600988D2A /* Assets.xcassets */; };
 		3B075817256C660600988D2A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B075815256C660600988D2A /* LaunchScreen.storyboard */; };
@@ -18,8 +17,6 @@
 		3B07583E256C6E3200988D2A /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B07583D256C6E3200988D2A /* CreateAccountViewController.swift */; };
 		3B075846256C6FBF00988D2A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B075845256C6FBF00988D2A /* HomeViewController.swift */; };
 		3B07584B256C7E0D00988D2A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B07584A256C7E0D00988D2A /* LoginViewController.swift */; };
-		3BADCC5025730A7400EE1702 /* ContactTracingBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BADCC4F25730A7400EE1702 /* ContactTracingBrain.swift */; };
-		3BEC2E592575C5650009C1F6 /* QuarantineBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEC2E582575C5650009C1F6 /* QuarantineBrain.swift */; };
 		3C255AC3258205AC004E6434 /* LocationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C255AC2258205AC004E6434 /* LocationResponse.swift */; };
 		3CB795A02580D4BD002D4DA8 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB7959F2580D4BD002D4DA8 /* Alert.swift */; };
 		A3DAEA9D2579CACE0085783B /* UserObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DAEA9C2579CACE0085783B /* UserObject.swift */; };
@@ -48,7 +45,6 @@
 		3B075807256C660500988D2A /* ContactTracing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactTracing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B07580A256C660500988D2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B07580C256C660500988D2A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3B07580E256C660500988D2A /* ContactTracingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTracingViewController.swift; sourceTree = "<group>"; };
 		3B075811256C660500988D2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3B075813256C660600988D2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3B075816256C660600988D2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -62,8 +58,6 @@
 		3B07583D256C6E3200988D2A /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		3B075845256C6FBF00988D2A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3B07584A256C7E0D00988D2A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		3BADCC4F25730A7400EE1702 /* ContactTracingBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTracingBrain.swift; sourceTree = "<group>"; };
-		3BEC2E582575C5650009C1F6 /* QuarantineBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuarantineBrain.swift; sourceTree = "<group>"; };
 		3C255AC2258205AC004E6434 /* LocationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationResponse.swift; sourceTree = "<group>"; };
 		3C7FBD9925773C7000FF9066 /* ContactTracing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ContactTracing.entitlements; sourceTree = "<group>"; };
 		3CB7959F2580D4BD002D4DA8 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
@@ -155,8 +149,6 @@
 			isa = PBXGroup;
 			children = (
 				3CB7959F2580D4BD002D4DA8 /* Alert.swift */,
-				3BEC2E582575C5650009C1F6 /* QuarantineBrain.swift */,
-				3BADCC4F25730A7400EE1702 /* ContactTracingBrain.swift */,
 				A3DAEA9C2579CACE0085783B /* UserObject.swift */,
 				A3DAEA9E2579CD240085783B /* DataModelServices.swift */,
 				A3DAEAA2257EEFC10085783B /* LocationObject.swift */,
@@ -168,7 +160,6 @@
 		3BEC2E5F2575C5BE0009C1F6 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				3B07580E256C660500988D2A /* ContactTracingViewController.swift */,
 				3B07584A256C7E0D00988D2A /* LoginViewController.swift */,
 				3B07583D256C6E3200988D2A /* CreateAccountViewController.swift */,
 				3B075845256C6FBF00988D2A /* HomeViewController.swift */,
@@ -318,11 +309,8 @@
 				3C255AC3258205AC004E6434 /* LocationResponse.swift in Sources */,
 				3B075846256C6FBF00988D2A /* HomeViewController.swift in Sources */,
 				A3DAEA9D2579CACE0085783B /* UserObject.swift in Sources */,
-				3BADCC5025730A7400EE1702 /* ContactTracingBrain.swift in Sources */,
 				3B07583E256C6E3200988D2A /* CreateAccountViewController.swift in Sources */,
-				3BEC2E592575C5650009C1F6 /* QuarantineBrain.swift in Sources */,
 				3CB795A02580D4BD002D4DA8 /* Alert.swift in Sources */,
-				3B07580F256C660500988D2A /* ContactTracingViewController.swift in Sources */,
 				A3DAEAA3257EEFC10085783B /* LocationObject.swift in Sources */,
 				3B07580B256C660500988D2A /* AppDelegate.swift in Sources */,
 				3B07580D256C660500988D2A /* SceneDelegate.swift in Sources */,
