@@ -102,6 +102,8 @@ struct DataModelServices {
                     return
             }
             
+            callback()
+            
         }
         task.resume()
         
