@@ -186,7 +186,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         
         //pull current date, store in userdefaults
         qStartDate = Date()
-        print(qStartDate)
+		print(qStartDate ?? "")
         userDefaults.setValue(qStartDate, forKey: "qStart")
         
         //update daysLeft
