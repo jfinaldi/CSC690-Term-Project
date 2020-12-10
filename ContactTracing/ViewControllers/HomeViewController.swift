@@ -65,6 +65,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     let maxDays: Int = 14
     let secondsDivider: Double = 86400.00
     let maxTimeLapsed: Double = 1209600.00   //UNCOMMENT THIS BEFORE FINAL SUBMISSION
+    var locationCounter: Int = 0
     //let maxTimeLapsed: Double = 30.00
     
     let locationManager = CLLocationManager()
@@ -299,14 +300,35 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         let center = CLLocationCoordinate2D(latitude: mUserLocation.coordinate.latitude, longitude: mUserLocation.coordinate.longitude)
         self.currentLocation = center
         let mRegion = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-        map1.setRegion(mRegion, animated: true)
 
         // Get user's Current Location and Drop a pin
         let mkAnnotation: MKPointAnnotation = MKPointAnnotation()
         mkAnnotation.coordinate = CLLocationCoordinate2DMake(mUserLocation.coordinate.latitude, mUserLocation.coordinate.longitude)
-        map1.addAnnotation(mkAnnotation)
+        if locationCounter == 0 {
+            map1.setRegion(mRegion, animated: true)
+            map1.addAnnotation(mkAnnotation)
+            
+        }
         
-        locationManager.stopUpdatingLocation()
+        locationCounter = locationCounter + 1
+        print("location counter: \(locationCounter)")
+        if locationCounter == 300 {
+            
+            //send current location to the model to be stored
+            if let name = userDefaults.string(forKey: "username"), let tok = userDefaults.string(forKey: "login_token"){
+            DispatchQueue.global().async { [] in
+                DataModelServices().logLocation(username: name, login_token: tok,
+                                                latitude: mUserLocation.coordinate.latitude,
+                                                longtitude: mUserLocation.coordinate.longitude,
+                                                callback:{ () in
+                                                    print("Added a location")
+                                                })
+    
+                }
+            }
+            locationCounter = 0
+        
+        }
     }
 
     override func viewDidLoad() {
