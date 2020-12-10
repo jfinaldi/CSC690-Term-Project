@@ -18,6 +18,7 @@ class CreateAccountViewController: UIViewController {
     
     @IBAction func submitClicked(_ sender: Any) {
         
+        //output a modal if user leaves a field blank
         guard !(username.text!.isEmpty) && !(password.text!.isEmpty) else {
             let alert = UIAlertController(title: "ಠ_ಠ", message: "Fill out all fields please", preferredStyle: .alert)
             self.present(alert, animated: true)
@@ -26,24 +27,23 @@ class CreateAccountViewController: UIViewController {
             return
         }
         
-//        //make sure we have a username
-//        guard username.text != "" else {
-//            print("No username entered")
-//            return
-//        }
-//        //make sure we have a password
-//        guard password.text != "" else {
-//            print("No password entered")
-//            return
-//        }
-//        
-        //send username and password to database
-        DispatchQueue.global().async { [self] in
-            //call a function inside DataModelServices to register
+        //this is temporary
+        guard let name: String = username.text, let pass: String = password.text else {
+            return
         }
         
-        //segue back into login
-        self.performSegue(withIdentifier: "CreateToLogin", sender: self)
+        // TODO: verify login information
+        DispatchQueue.global().async { [self] in
+            DataModelServices().signup(username: name, password: pass, callback: { () in
+                
+                //do important stuff in the main thread
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "CreateToLogin", sender: self)
+                }
+            })
+        }
+        print(name)
+        print(pass)
     }
     
     override func viewDidLoad() {
