@@ -34,12 +34,16 @@ class CreateAccountViewController: UIViewController {
         
         // TODO: verify login information
         DispatchQueue.global().async { [self] in
-            DataModelServices().signup(username: name, password: pass, callback: { () in
+            DataModelServices().signup(username: name, password: pass, callback: { (success) in
                 
                 //do important stuff in the main thread
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "CreateToLogin", sender: self)
-                }
+				if success {
+					DispatchQueue.main.async {
+						self.performSegue(withIdentifier: "CreateToLogin", sender: self)
+					}
+				} else {
+					// show a label that says "username is taken"
+				}
             })
         }
         print(name)
