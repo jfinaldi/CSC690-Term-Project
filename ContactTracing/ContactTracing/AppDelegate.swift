@@ -92,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 		completionHandler([.banner, .sound])
 	}
 	
-    static let dangerMessage = Notification.Name("DangerMessage")
+    static let dangerMessage = Notification.Name("dangerMessage")
     
 	func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
 		if response.notification.request.identifier == "" {

@@ -46,12 +46,6 @@ enum statusLabels: String, CaseIterable, CustomStringConvertible {
         return self.rawValue
     }
 }
-    
-//struct ViewComponents {
-//    let redButton: redButtons
-//    let greenButton: greenButtons
-//    let status: statusLabels
-//}
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -67,9 +61,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     var userPhase = 1 //1 for healthy, 2 for at risk, 3 for infected
     var daysLeft: Int = 14
     var qStartDate: Date? = nil
-    //let maxTimeLapsed: Double = 1209600.00
-    let maxTimeLapsed: Double = 30.00
-    //var vComp = ViewComponents(redButton: redButtons.infected, greenButton: greenButtons.tested, status: statusLabels.healthy)
+    let maxDays: Int = 14
+    let secondsDivider: Double = 86400.00
+    let maxTimeLapsed: Double = 1209600.00   //UNCOMMENT THIS BEFORE FINAL SUBMISSION
+    //let maxTimeLapsed: Double = 30.00
     
     let locationManager = CLLocationManager()
     let cBrain = ContactTracingBrain()
@@ -221,7 +216,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         }
         
         //update daysLeft
-        self.daysLeft = Int(timeElapsed / 86400)
+        self.daysLeft =  maxDays - Int(timeElapsed / secondsDivider)
         print("Days left: \(daysLeft)")
         
         //update qLabel2
@@ -279,10 +274,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         qTimerIsUp() //nuke the quarantine
     }
     
-    func quarantineEnded() { //may need to make this an @objc function
-        
-    }
-    
     @objc func updateCounter() {
         //qLabel2.text = "Days Left: " + cBrain.daysLeft
     }
@@ -327,8 +318,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         if userPhase == 0 { userPhase = 1 }
         self.qStartDate = userDefaults.object(forKey: "qStart") as? Date
         
-        viewDidAppear(true)
-        
         //Map code attributed to link 1 in header
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.requestWhenInUseAuthorization()
@@ -340,30 +329,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         }
         map1.setCenter(self.currentLocation, animated: false)
         
-        
-        //check the quarantine days left
-        //daysLeft
-        
-        //home1Label.text = vComp.status.rawValue
-        
         updateButtons()
         
-//        home1Label.text = statusLabels.healthy.rawValue
-//
-//        blueButton.setTitle( "Begin Quarantine" , for: .normal )
-//        blueButton.isHidden = false
-//
-//        qLabel1.isHidden = true
-//        qLabel2.isHidden = true
-        
-
         //add our notifications
-//        NotificationCenter.default.addObserver(self, selector: #selector(updateCounter),
-//                                               name: QuarantineBrain.qCounterUpdated,
-//                                               object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(countdownCompleted),
-//                                               name: QuarantineBrain.qCounterFinished,
-//                                               object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(outputNotification),
                                                name: AppDelegate.dangerMessage,
                                                object: nil)
