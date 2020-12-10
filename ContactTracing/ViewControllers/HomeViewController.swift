@@ -52,6 +52,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var home1Label: UILabel!
     @IBOutlet weak var qLabel1: UILabel!
     @IBOutlet weak var qLabel2: UILabel!
+    @IBOutlet weak var welcomeUser: UILabel!
     
     
     @IBOutlet weak var redButton: UIButton!
@@ -317,6 +318,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         self.userPhase = userDefaults.integer(forKey: "userPhase")
         if userPhase == 0 { userPhase = 1 }
         self.qStartDate = userDefaults.object(forKey: "qStart") as? Date
+        if let tempStr = userDefaults.string(forKey: "username") {
+            welcomeUser.text = "Welcome, " + tempStr
+        }
         
         //Map code attributed to link 1 in header
         self.locationManager.requestAlwaysAuthorization()
