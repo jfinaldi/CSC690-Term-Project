@@ -11,7 +11,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="login" id="BYZ-38-t0r" customClass="LoginViewController" customModule="ContactTracing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="login" interfaceStyle="light" id="BYZ-38-t0r" customClass="LoginViewController" customModule="ContactTracing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -41,7 +41,7 @@
                                     <constraint firstAttribute="height" constant="52" id="RBf-NK-Yhj"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1FD-65-Bej">
                                 <rect key="frame" x="130" y="315" width="154" height="80"/>
@@ -112,7 +112,7 @@
         <!--Create Account View Controller-->
         <scene sceneID="nf5-mn-FhE">
             <objects>
-                <viewController storyboardIdentifier="CreateAccount" id="Hbp-u8-mbV" customClass="CreateAccountViewController" customModule="ContactTracing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateAccount" interfaceStyle="light" id="Hbp-u8-mbV" customClass="CreateAccountViewController" customModule="ContactTracing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aFC-gO-QIN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -213,7 +213,7 @@
         <!--Home View Controller-->
         <scene sceneID="AxB-c9-aNx">
             <objects>
-                <viewController storyboardIdentifier="Home1" id="g8K-6a-Cak" customClass="HomeViewController" customModule="ContactTracing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Home1" interfaceStyle="light" id="g8K-6a-Cak" customClass="HomeViewController" customModule="ContactTracing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Q3V-gA-XJS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -340,7 +340,7 @@
         <!--Navigation Controller-->
         <scene sceneID="LRK-Zm-MMR">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JIn-7m-OOG" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" interfaceStyle="light" id="JIn-7m-OOG" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="6ch-lU-yx7"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fSG-f0-5dD">
@@ -358,8 +358,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="rTL-4N-cBx"/>
-        <segue reference="GYV-dN-2R9"/>
+        <segue reference="cqM-Y5-u87"/>
+        <segue reference="MDE-nW-DVa"/>
+        <segue reference="iP1-nk-EoJ"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">

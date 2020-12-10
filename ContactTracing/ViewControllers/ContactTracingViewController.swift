@@ -18,6 +18,7 @@ class ContactTracingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+		overrideUserInterfaceStyle = .light
         
         //load user defaults information
         //mainBrain.isLoggedIn = userDefaults.object(forKey: "")

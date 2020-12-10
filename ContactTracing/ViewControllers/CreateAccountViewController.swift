@@ -48,6 +48,7 @@ class CreateAccountViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+		overrideUserInterfaceStyle = .light
         
         self.navigationItem.setHidesBackButton(true, animated: false)
 
