@@ -66,7 +66,7 @@ con.connect((err) => {
                     })
                 } else {
                     // yes result -> user existed, return fail
-                    res.status(500).send({ success: false, code: 'existed' })
+                    res.status(200).send({ success: false, code: 'existed' })
                 }
             })
         } else {
