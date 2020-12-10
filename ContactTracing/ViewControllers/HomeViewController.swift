@@ -315,6 +315,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+		overrideUserInterfaceStyle = .light
         
         self.navigationItem.setHidesBackButton(true, animated: false)
         

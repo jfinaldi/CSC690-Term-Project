@@ -16,6 +16,10 @@ struct DataModelServices {
     
     // request params: username, pass, device_token
     // response: login_token
+	
+	struct SignupResponse: Codable {
+		let success: Bool
+	}
     
     // "https://localhost:4000/login"
     
@@ -71,7 +75,7 @@ struct DataModelServices {
     
     //app signup req(username: string, password: string) res(success: bool)
     
-    func signup(username: String, password: String, callback: @escaping () -> Void) {
+    func signup(username: String, password: String, callback: @escaping (Bool) -> Void) {
         
         let url = URL(string: "http://18.188.195.49:4000/signup")
         guard let requestUrl = url else { fatalError() }
@@ -101,6 +105,19 @@ struct DataModelServices {
                     print ("server error")
                     return
             }
+			
+			guard let data = data else {
+				// TODO: Deal with the error if this is an error
+				return
+			}
+			let decoder = JSONDecoder()
+			do {
+				let decoded = try decoder.decode(SignupResponse.self, from: data)
+				print(decoded.success)
+				callback(decoded.success)
+			} catch {
+				print(error)
+			}
             
             callback()
             

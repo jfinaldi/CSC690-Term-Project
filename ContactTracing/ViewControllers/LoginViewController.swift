@@ -61,6 +61,10 @@ class LoginViewController: UIViewController {
 		
 	}
 	
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+		self.view.endEditing(true)
+	}
+	
 	override func viewDidAppear(_ animated: Bool) {
 		if let _ = userDefaults.string(forKey: "login_token"), let _ = userDefaults.string(forKey: "username") {
 			self.performSegue(withIdentifier: "LoginToHome", sender: self) //This doesn't work!
@@ -75,7 +79,7 @@ class LoginViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+		overrideUserInterfaceStyle = .light
 		self.navigationItem.setHidesBackButton(true, animated: false)
 		
 		//get user defaults
