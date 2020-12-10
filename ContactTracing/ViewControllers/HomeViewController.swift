@@ -11,14 +11,6 @@ import CoreLocation
 import MapKit
 import UIKit
 
-//STRUCT FOR VIEW COMPONENTS
-//View1: Hold variables for not infected or quarantine
-//View2: Hold variables for infected
-//View3: Hold variables for not infected but quarantined
-//Every time a user clicks a button that induces a
-//status change, the view switches to that configuration
-//simply by changing the buttons or everything below the map
-
 enum greenButtons: String, CaseIterable, CustomStringConvertible {
     case tested = "Get Tested"
     case recovery = "Report Recovery"
@@ -64,14 +56,11 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     var qStartDate: Date? = nil
     let maxDays: Int = 14
     let secondsDivider: Double = 86400.00
-    let maxTimeLapsed: Double = 1209600.00   //UNCOMMENT THIS BEFORE FINAL SUBMISSION
+    let maxTimeLapsed: Double = 1209600.00
     let fiveMin: Int = 300 //300 seconds = 5 min
     var locationCounter: Int = 0
-    //let maxTimeLapsed: Double = 30.00
     
     let locationManager = CLLocationManager()
-    let cBrain = ContactTracingBrain()
-    let qBrain = QuarantineBrain()
     var userDefaults = UserDefaults.standard
     var currentLocation = CLLocationCoordinate2D()
     
@@ -175,18 +164,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    @objc func updateQuarantineDays() {
-        guard let days = cBrain.quarantineDaysLeft else {
-            print("We don't have any quarantine days left")
-            return
-        }
-        qLabel2.text = "Days Left: \(days)"
-    }
-    
     func beginQuarantine() {
         changeUserPhase(to: 2)
-        
-        cBrain.isQuarantined = true
         
         //pull current date, store in userdefaults
         qStartDate = Date()
@@ -250,7 +229,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
 	//Leslie called dib on this
     func beginInfection() {
         print("beginning infection")
-        cBrain.isInfected = true //mark user infected
         
         //send data to the server to notify other users
 		if let user = userDefaults.string(forKey: "username"),
@@ -274,16 +252,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func userRecovered() {
-        cBrain.isInfected = false
         qTimerIsUp() //nuke the quarantine
-    }
-    
-    @objc func updateCounter() {
-        //qLabel2.text = "Days Left: " + cBrain.daysLeft
-    }
-    
-    @objc func countdownCompleted() {
-        
     }
     
 	@objc func outputNotification(notification: Notification) {
