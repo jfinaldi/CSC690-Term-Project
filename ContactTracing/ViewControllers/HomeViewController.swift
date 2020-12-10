@@ -166,9 +166,11 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    //LESLIE TODO
     func goGetTested() {
         print("go get tested!")
+        if let url = URL(string: "https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/testing.html"){
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
     
     @objc func updateQuarantineDays() {
@@ -180,7 +182,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func beginQuarantine() {
-        //qBrain.startCountdown()
         changeUserPhase(to: 2)
         
         cBrain.isQuarantined = true
@@ -192,6 +193,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     func beginInfection() {
         print("beginning infection")
         cBrain.isInfected = true //mark user infected
+        
         //send data to the server to notify other users
 		if let user = userDefaults.string(forKey: "username"),
 		   let loginToken = userDefaults.string(forKey: "login_token"){
@@ -209,21 +211,12 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     //LESLIE
     func call911() {
         print("Im calling 911")
-        //we won't actually have their phone call 911
-        //perhaps we'll do a modal that asks the user if they are sure
-        //create modal
-        //create yes button
-        //create no button
-        //display button
-        //            //if no, do nothing
-        //            //if yes, output modal that says help on the way
-        //                //create modal
-        //                //create dismiss button for modal
+        
 		Alert.showCallAlert(on: self, with: "Are you sure you want to call 911?", message: "There's no backing out if you tap yes.")
     }
     
     func userRecovered() {
-        
+        cBrain.isInfected = false
     }
     
     func quarantineEnded() { //may need to make this an @objc function
