@@ -13,70 +13,6 @@ import BackgroundTasks
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
-    //The following four functions are attributed to
-    //https://github.com/spaceotech/BackgroundTask/blob/master/SOBackgroundTask/Application/AppDelegate.swift
-    
-    //register background tasks, for using location fetching in background
-    private func registerBackgroundTask() {
-        BGTaskScheduler.shared.register(forTaskWithIdentifier: "com.CT.locationFetcher", using: nil) { task in
-        //This task is cast with processing request (BGProcessingTask)
-        
-            self.handleLocationFetcherTask(task: task as! BGProcessingTask)
-        }
-    }
-    
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        scheduleLocationFetcher()
-    }
-    
-    //IM NOT ACTUALLY SURE IF WE NEED THIS. IT WAS ADDED TO ENSURE THAT
-    //OUR BACKGROUND STUFF WILL HOPEFULLY STILL OPERATE EVEN WHEN THE
-    //USER IS USING THE APP
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        scheduleLocationFetcher()
-    }
-    
-    func scheduleLocationFetcher() {
-        let request = BGProcessingTaskRequest(identifier: "com.CT.locationFetcher")
-        request.requiresNetworkConnectivity = true //the task needs network processing
-        request.requiresExternalPower = false
-        
-        request.earliestBeginDate = Date(timeIntervalSinceNow: 60 * 5) //get location after 5 min
-        
-        do {
-            try BGTaskScheduler.shared.submit(request)
-        } catch {
-            print("Could not schedule location fetch.")
-        }
-    }
-    
-    private func handleLocationFetcherTask(task: BGProcessingTask) {
-        scheduleLocationFetcher() //schedule the location fetch
-        
-        //I'm assuming this is the stuff we do when the timer expires??
-        task.expirationHandler = {
-            //This Block call by System
-            //Cancel your all tasks & queues
-        }
-        
-        /* THIS IS THE TUTORIAL CODE
-        I DON"T KNOW IF THIS IS WHERE WE ACTUALLY PULL LOCATION FROM.
-        IF IT IS, I DON'T KNOW HOW TO SET UP LOCATION SERVICES FROM
-        ANYWHERE OTHER THAN A VC inside viewDidLoad(). AND I DON"T KNOW
-        IF I CAN REQUEST THE VC TO DO IT FOR ME FROM HERE, ESPECIALLY
-        IF THE APP IS RUNNING IN THE BACKGROUND
-        //Get & Set New Data
-        let interator =  ListInterator()
-        let presenter =  ListPresenter()
-        presenter.interator = interator
-        presenter.setNewData()
-        */
-                
-        
-        task.setTaskCompleted(success: true)
-        
-    }
-
 	func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
 		let token = deviceToken.map{String(format: "%02.2hhx", $0)}.joined()
 		print("token: \(token)")
@@ -104,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 		completionHandler(UIBackgroundFetchResult.newData)
 	}
 	
-    static let dangerMessage = Notification.Name("DangerMessage")
+    static let dangerMessage = Notification.Name("dangerMessage")
     
 	func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
 		
@@ -135,8 +71,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 		UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: {(granted, error) in
 			print("granted: \(granted)")
 		})
-        
-        registerBackgroundTask()
 		
 		UIApplication.shared.registerForRemoteNotifications()
 		UIApplication.shared.applicationIconBadgeNumber = 0
