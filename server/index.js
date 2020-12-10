@@ -26,7 +26,8 @@ var options = new apn.Provider({
 })
 
 var note = new apn.Notification()
-note.alert = 'You have been in close contact with covid'
+note.title = 'You have been in close contact with covid'
+note.body = 'You should start quarantining and get a test'
 note.badge = 1
 note.sound = 'default'
 note.topic = 'jfinaldi.sfsu.ContactTracing'

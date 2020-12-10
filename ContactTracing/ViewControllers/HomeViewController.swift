@@ -84,6 +84,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         map.isZoomEnabled = true
         map.isScrollEnabled = true
         map.isUserInteractionEnabled = true
+		map.showsUserLocation = true
         return map
 
     }()
@@ -291,7 +292,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
-    @objc func outputNotification() {
+	@objc func outputNotification(notification: Notification) {
         let alert = UIAlertController(title: "YOU ARE AT RISK", message: "It is highly advised to start quarantine procedures asap", preferredStyle: .alert)
         self.present(alert, animated: true)
         let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
@@ -319,6 +320,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 		overrideUserInterfaceStyle = .light
+		
         
         self.navigationItem.setHidesBackButton(true, animated: false)
         
@@ -327,7 +329,23 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         if userPhase == 0 { userPhase = 1 }
         self.qStartDate = userDefaults.object(forKey: "qStart") as? Date
         
-        viewDidAppear(true)
+        //viewDidAppear(true)
+		
+		if let loginToken = userDefaults.string(forKey: "login_token"), let username = userDefaults.string(forKey: "username") {
+			DispatchQueue.global().async {
+				DataModelServices().getLocation(username: username, login_token: loginToken) { [self] (res) in
+					res.locations.forEach { (location) in
+						let annotation = MKPointAnnotation()
+						let centerCoordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude:location.longtitude)
+						annotation.coordinate = centerCoordinate
+						map1.addAnnotation(annotation)
+					}
+				}
+				//DispatchQueue.main()
+			}
+		} else {
+			self.performSegue(withIdentifier: "BackToLogin", sender: self)
+		}
         
         //Map code attributed to link 1 in header
         self.locationManager.requestAlwaysAuthorization()
@@ -364,7 +382,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
 //        NotificationCenter.default.addObserver(self, selector: #selector(countdownCompleted),
 //                                               name: QuarantineBrain.qCounterFinished,
 //                                               object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(outputNotification),
+		NotificationCenter.default.addObserver(self, selector: #selector(outputNotification(notification:)),
                                                name: AppDelegate.dangerMessage,
                                                object: nil)
     }

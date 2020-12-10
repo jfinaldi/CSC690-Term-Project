@@ -90,19 +90,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 	
 	func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
 		completionHandler([.banner, .sound])
+		
+		NotificationCenter.default.post(name: AppDelegate.dangerMessage, object: nil)
+	}
+	
+	func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+		print("reached")
+		let title = userInfo["title"] as? String
+		let body = userInfo["body"] as? String
+		
+		print(title as Any)
+		print(body as Any)
+		completionHandler(UIBackgroundFetchResult.newData)
 	}
 	
     static let dangerMessage = Notification.Name("DangerMessage")
     
 	func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-		if response.notification.request.identifier == "" {
-			print("handling")
+		
+		if let notification = response.notification.request.content.userInfo as? [String:AnyObject] {
+			let message = parseRemoteNotification(notification: notification)
+			print(message as Any)
 		}
-		completionHandler()
-        UIApplication.shared.applicationIconBadgeNumber = 0
         
         //Post a notification to the Home VC to output modal
         NotificationCenter.default.post(name: AppDelegate.dangerMessage, object: nil)
+		completionHandler()
+	}
+	
+	private func parseRemoteNotification(notification:[String:AnyObject]) -> String? {
+		if let aps = notification["aps"] as? [String:AnyObject] {
+			print("reached")
+			let alert = aps["alert"] as? String
+			return alert
+		}
+		
+		return nil
 	}
 
 

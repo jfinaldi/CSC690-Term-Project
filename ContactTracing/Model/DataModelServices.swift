@@ -124,11 +124,10 @@ struct DataModelServices {
         
     }
     
-    
     //get locations of the user req(username: string, login_token: int) res(locations: [Location])
     // "https://localhost:4000/getLocation"
     
-    func getLocation(username: String, login_token: String, callback: @escaping (LocationObject) -> Void) {
+    func getLocation(username: String, login_token: String, callback: @escaping (LocationResponse) -> Void) {
         let url = URL(string: "http://18.188.195.49:4000/getLocation")
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object
@@ -163,8 +162,7 @@ struct DataModelServices {
             }
             let decoder = JSONDecoder()
             do {
-                let decoded = try decoder.decode(LocationObject.self, from: data)
-                
+				let decoded = try decoder.decode(LocationResponse.self, from: data)
                 callback(decoded) // return LocationObject
             } catch {
                 print(error)

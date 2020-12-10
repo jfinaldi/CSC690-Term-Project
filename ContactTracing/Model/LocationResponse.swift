@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+struct LocationResponse: Codable {
+	let locations: [LocationObject]
+}
