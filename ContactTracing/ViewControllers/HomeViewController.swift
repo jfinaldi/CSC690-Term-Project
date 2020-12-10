@@ -66,6 +66,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     var userPhase = 1 //1 for healthy, 2 for at risk, 3 for infected
     var daysLeft: Int = 14
+    var qStartDate: Date? = nil
     //var vComp = ViewComponents(redButton: redButtons.infected, greenButton: greenButtons.tested, status: statusLabels.healthy)
     
     let locationManager = CLLocationManager()
@@ -186,7 +187,61 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         
         cBrain.isQuarantined = true
         
+        //pull current date, store in userdefaults
+        qStartDate = Date()
+        print(qStartDate)
+        userDefaults.setValue(qStartDate, forKey: "qStart")
+        
+        //update daysLeft
+        self.daysLeft = 14
+        print(daysLeft)
+        
+        //update qLabel2
+        qLabel2.text = "Days Left: \(daysLeft)"
         updateButtons()
+    }
+    
+    func isQuarantineDoneYet() {
+        //pull current date
+        let curDay = Date()
+        
+        //if current day = quarantine end day
+        guard qStartDate != nil else {
+            return
+        }
+        let timeElapsed = curDay.timeIntervalSince(qStartDate!)
+        print("Time elapsed: \(timeElapsed)")
+        
+        //find out if 14 days has elapsed
+        if timeElapsed >= 1209600 {
+        //if timeElapsed >= 30 {  //30 SECONDS: TEMPORARY FOR TESTING!
+            print("Quarantine is finished!")
+            qTimerIsUp()//end quarantine
+        }
+        
+        //update daysLeft
+        self.daysLeft = Int(timeElapsed / 86400)
+        print("Days left: \(daysLeft)")
+        
+        //update qLabel2
+        qLabel2.text = "Days Left: \(daysLeft)"
+        updateButtons()
+    }
+    
+    func qTimerIsUp() {
+        //set quarantine start date variable to nil
+        qStartDate = nil
+        userDefaults.setValue(qStartDate, forKey: "qStart")
+        
+        //change the user phase to 1
+        changeUserPhase(to: 1)
+        
+        //call updateButtons
+        updateButtons()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        isQuarantineDoneYet()
     }
     
 	//Leslie called dib on this
@@ -265,6 +320,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         userDefaults = UserDefaults.standard
         self.userPhase = userDefaults.integer(forKey: "userPhase")
         if userPhase == 0 { userPhase = 1 }
+        self.qStartDate = userDefaults.object(forKey: "qStart") as? Date
         
         //Map code attributed to link 1 in header
         self.locationManager.requestAlwaysAuthorization()
