@@ -65,6 +65,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     let maxDays: Int = 14
     let secondsDivider: Double = 86400.00
     let maxTimeLapsed: Double = 1209600.00   //UNCOMMENT THIS BEFORE FINAL SUBMISSION
+    let fiveMin: Int = 300 //300 seconds = 5 min
     var locationCounter: Int = 0
     //let maxTimeLapsed: Double = 30.00
     
@@ -307,12 +308,11 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         if locationCounter == 0 {
             map1.setRegion(mRegion, animated: true)
             map1.addAnnotation(mkAnnotation)
-            
         }
         
         locationCounter = locationCounter + 1
         print("location counter: \(locationCounter)")
-        if locationCounter == 300 {
+        if locationCounter == fiveMin {
             
             //send current location to the model to be stored
             if let name = userDefaults.string(forKey: "username"), let tok = userDefaults.string(forKey: "login_token"){
@@ -320,14 +320,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 DataModelServices().logLocation(username: name, login_token: tok,
                                                 latitude: mUserLocation.coordinate.latitude,
                                                 longtitude: mUserLocation.coordinate.longitude,
-                                                callback:{ () in
-                                                    print("Added a location")
-                                                })
-    
+                                                callback:{ () in })
                 }
             }
             locationCounter = 0
-        
         }
     }
 
@@ -343,23 +339,21 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         if userPhase == 0 { userPhase = 1 }
         self.qStartDate = userDefaults.object(forKey: "qStart") as? Date
         
-        //viewDidAppear(true)
-		
-		if let loginToken = userDefaults.string(forKey: "login_token"), let username = userDefaults.string(forKey: "username") {
-			DispatchQueue.global().async {
-				DataModelServices().getLocation(username: username, login_token: loginToken) { [self] (res) in
-					res.locations.forEach { (location) in
-						let annotation = MKPointAnnotation()
-						let centerCoordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude:location.longtitude)
-						annotation.coordinate = centerCoordinate
-						map1.addAnnotation(annotation)
-					}
-				}
-				//DispatchQueue.main()
-			}
-		} else {
-			self.performSegue(withIdentifier: "BackToLogin", sender: self)
-		}
+        //drop all location pins on map
+        if let loginToken = userDefaults.string(forKey: "login_token"), let username = userDefaults.string(forKey: "username") {
+            DispatchQueue.global().async {
+                DataModelServices().getLocation(username: username, login_token: loginToken) { [self] (res) in
+                    res.locations.forEach { (location) in
+                        let annotation = MKPointAnnotation()
+                        let centerCoordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude:location.longtitude)
+                        annotation.coordinate = centerCoordinate
+                        map1.addAnnotation(annotation)
+                    }
+                }
+            }
+        } else {
+            self.performSegue(withIdentifier: "BackToLogin", sender: self)
+        }
         if let tempStr = userDefaults.string(forKey: "username") {
             welcomeUser.text = "Welcome, " + tempStr
         }
@@ -377,9 +371,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         
         updateButtons()
         
-		NotificationCenter.default.addObserver(self, selector: #selector(outputNotification(notification:)),
-                                               name: AppDelegate.dangerMessage,
-                                               object: nil)
     }
 
     
