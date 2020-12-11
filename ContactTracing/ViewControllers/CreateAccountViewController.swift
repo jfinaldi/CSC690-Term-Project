@@ -44,7 +44,9 @@ class CreateAccountViewController: UIViewController {
 						self.performSegue(withIdentifier: "CreateToLogin", sender: self)
 					}
 				} else {
-                    nameTaken.isHidden = false
+                    DispatchQueue.main.async {
+                        self.nameTaken.isHidden = false
+                    }
 				}
             })
         }
