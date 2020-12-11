@@ -134,7 +134,7 @@ con.connect((err) => {
                 if (result[0].login_token === req.body.login_token) {
                     con.query(`SELECT latitude, longtitude, time, infected FROM location WHERE user_id=?`, [result[0].user_id], (err, result) => {
                         if (err) throw err
-                        console.log(result)
+                        //console.log(result)
                         res.send({ locations: result })
                     })
                 } else {

@@ -57,7 +57,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     let maxDays: Int = 14
     let secondsDivider: Double = 86400.00
     let maxTimeLapsed: Double = 1209600.00
-    let fiveMin: Int = 300 //300 seconds = 5 min
+    let timeLimit: Int = 120 // 2 min
     var locationCounter: Int = 0
     
     let locationManager = CLLocationManager()
@@ -280,8 +280,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         }
         
         locationCounter = locationCounter + 1
-        print("location counter: \(locationCounter)")
-        if locationCounter == fiveMin {
+        if locationCounter == timeLimit {
+			print("location counter: \(locationCounter)")
             
             //send current location to the model to be stored
             if let name = userDefaults.string(forKey: "username"), let tok = userDefaults.string(forKey: "login_token"){
@@ -295,6 +295,11 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             locationCounter = 0
         }
     }
+	
+	@objc func onNotification(notification: Notification) -> Void {
+		print("huh")
+		isQuarantineDoneYet()
+	}
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -340,6 +345,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         
         updateButtons()
         
+		NotificationCenter.default.addObserver(self, selector: #selector(onNotification(notification:)), name: Notification.Name("checkDay"), object: nil)
     }
 
     
