@@ -241,7 +241,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
 		
         //start a quarantine
         beginQuarantine()
-		Alert.showBasicAlert(on: self, with: "You dumb dumb haven't been wearing mask ehh!?", message: "We have to notify bunch of unlucky bastards that they might have gotten covid now. You better stay inside and not fuck this up any further!!!")
+		Alert.showBasicAlert(on: self, with: "You dumb dumb haven't been wearing mask ehh!?", message: "We have to notify bunch of unlucky bastards that they might have gotten covid now. You better stay inside and not mess this up any further!!!")
     }
     
     //LESLIE
