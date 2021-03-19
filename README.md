@@ -1,11 +1,11 @@
 # CSC690-Term-Project
 Contact Tracing App
 
-Jennifer Finaldi ID: 920290420
+Jennifer Finaldi
 
-Leslie Zhou ID: 916602224
+Leslie Zhou
 
-Wameedh Mohammed Ali ID: 920678405
+Wameedh Mohammed Ali
 
 Contact Tracing iOS App
 
